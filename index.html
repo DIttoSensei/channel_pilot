@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel Pilot | Professional YouTube Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: radial-gradient(circle at 50% 50%, #eff6ff 0%, #ffffff 100%); }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <nav class="fixed w-full bg-white/80 backdrop-blur-md z-40 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900">ChannelPilot</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                <a href="#how-it-works" class="hover:text-blue-600 transition">Process</a>
+                <a href="#pricing" class="hover:text-blue-600 transition">Pricing</a>
+            </div>
+            <button onclick="openModal()" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                Get Started
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero-gradient pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6">AI-Powered Content Engine</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-slate-900">
+                Automate your <span class="text-blue-600">YouTube growth</span> while you sleep.
+            </h1>
+            <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Channel Pilot builds, manages, and scales faceless channels using advanced AI pipelines. We handle everything from niche research to daily 4K uploads.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button onclick="openModal()" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-200">
+                    Launch My Channel
+                </button>
+                <a href="#pricing" class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition">
+                    View Pricing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-slate-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Transparent Pricing</h2>
+                <p class="text-slate-500">No hidden fees. Just pure automation performance.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">The Pilot Demo</h3>
+                        <p class="text-slate-500 text-sm mb-6">Perfect to see the quality before committing.</p>
+                        <div class="text-4xl font-black mb-6">$0 <span class="text-sm font-normal text-slate-400">/ One Video</span></div>
+                        <ul class="space-y-4 text-sm text-slate-600 mb-8">
+                            <li class="flex items-center gap-2">✅ 1 High-Quality Demo Video</li>
+                            <li class="flex items-center gap-2">✅ Niche Customization</li>
+                            <li class="flex items-center gap-2">✅ Professional Voiceover</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal()" class="w-full py-3 border border-blue-600 text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition">Get Free Demo</button>
+                </div>
+                <div class="bg-blue-600 p-8 rounded-3xl text-white shadow-2xl shadow-blue-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-500 px-4 py-1 rounded-bl-xl text-xs font-bold uppercase">Popular</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Full Automation</h3>
+                        <p class="text-blue-100 text-sm mb-6">Complete channel management on autopilot.</p>
+                        <div class="text-4xl font-black mb-6">$49 <span class="text-sm font-normal text-blue-200">/ setup fee</span></div>
+                        <p class="text-sm mb-6">+ $29/mo recurring maintenance</p>
+                        <ul class="space-y-4 text-sm text-blue-50 mb-8">
+                            <li class="flex items-center gap-2">🚀 2 High-Quality Posts Daily</li>
+                            <li class="flex items-center gap-2">🚀 Custom Identity (Email & Acc)</li>
+                            <li class="flex items-center gap-2">🚀 Telegram Status Reports</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal()" class="w-full py-3 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg">Start Full Pipeline</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="faq-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-3xl max-w-lg w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <h3 class="text-2xl font-bold mb-4 text-slate-900 text-center">Ready to Take Off? 🛫</h3>
+            <p class="text-slate-500 mb-6 text-center">Here is what happens next:</p>
+            <div class="space-y-4 mb-8">
+                <div class="flex gap-4 p-3 bg-slate-50 rounded-xl">
+                    <div class="text-xl">🛠️</div>
+                    <p class="text-sm text-slate-600">We discuss your niche on Telegram.</p>
+                </div>
+                <div class="flex gap-4 p-3 bg-slate-50 rounded-xl">
+                    <div class="text-xl">📹</div>
+                    <p class="text-sm text-slate-600">We send you a custom demo video for approval.</p>
+                </div>
+                <div class="flex gap-4 p-3 bg-slate-50 rounded-xl">
+                    <div class="text-xl">⚡</div>
+                    <p class="text-sm text-slate-600">Once paid, we activate the daily posting logic.</p>
+                </div>
+            </div>
+            <button onclick="contactPilot()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition">Continue to Telegram</button>
+            <button onclick="closeModal()" class="w-full text-slate-400 mt-4 text-sm font-medium hover:text-slate-600">Maybe later</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('faq-modal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('faq-modal').classList.add('hidden');
+        }
+        function contactPilot() {
+            const username = "ditto_sensei"; // UPDATE THIS
+            const text = encodeURIComponent("Hello Channel Pilot! I want to launch an automated channel. I am interested in this niche: ");
+            window.location.href = `https://t.me/${username}?text=${text}`;
+        }
+    </script>
+</body>
+</html>
