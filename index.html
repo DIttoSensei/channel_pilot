@@ -5,55 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Channel Pilot | Professional YouTube Automation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: radial-gradient(circle at 50% 50%, #eff6ff 0%, #ffffff 100%); }
+        .hero-gradient { background: radial-gradient(circle at 50% 0%, #eff6ff 0%, #ffffff 70%); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseSoft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .animate-fade-up { animation: fadeUp 0.7s ease-out forwards; }
+        .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .btn-pulse { animation: pulseSoft 2.5s ease-in-out infinite; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgb(0 0 0 / 0.1); }
     </style>
+
+    <!-- Favicon (kept exactly as before) -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Channel Pilot | Professional YouTube Automation</title>
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://channel-pilot.vercel.app/">
     <meta property="og:title" content="Channel Pilot | Professional YouTube Automation">
-    <meta property="og:description" content="Stop editing, start growing. Fully automated faceless channels starting today.">
+    <meta property="og:description" content="Stop editing. Start growing. Fully automated faceless YouTube channels.">
     <meta property="og:image" content="https://channel-pilot.vercel.app/assets/preview-image.png">
 
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://channel-pilot.vercel.app/">
     <meta property="twitter:title" content="Channel Pilot | Professional YouTube Automation">
-    <meta property="twitter:description" content="Stop editing, start growing. Fully automated faceless channels starting today.">
+    <meta property="twitter:description" content="Stop editing. Start growing. Fully automated faceless YouTube channels.">
     <meta property="twitter:image" content="https://channel-pilot.vercel.app/assets/preview-image.png">
-
 </head>
 <body class="bg-white text-slate-900">
 
+    <!-- Navbar -->
     <nav class="fixed w-full bg-white/80 backdrop-blur-md z-40 border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
+            <a href="/" class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
-                <span class="text-xl font-extrabold tracking-tight text-slate-900">ChannelPilot</span>
+                <span class="text-xl font-extrabold tracking-tight">ChannelPilot</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="/about.html" class="hover:text-slate-900 transition">About</a>
+                <a href="#pricing" class="hover:text-slate-900 transition">Pricing</a>
+                <a href="/privacy.html" class="hover:text-slate-900 transition">Privacy</a>
             </div>
-            
-            <button onclick="openModal()" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+            <button onclick="openModal()" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
                 Get Started
             </button>
         </div>
     </nav>
 
-    <section class="hero-gradient pt-32 pb-20 px-6">
+    <!-- Hero -->
+    <section class="hero-gradient pt-32 pb-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6">AI-Powered Content Engine</span>
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-slate-900">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6 animate-fade-up">
+                AI-Powered Content Engine
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight animate-fade-up animate-delay-1">
                 Automate your <span class="text-blue-600">YouTube growth</span> while you sleep.
             </h1>
-            <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Channel Pilot builds, manages, and scales faceless channels using advanced AI pipelines. We handle everything from niche research to daily 4K uploads.
+            <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-up animate-delay-2">
+                Channel Pilot builds and runs complete faceless channels for you — from niche research to daily 4K uploads. No editing. No burnout. Just consistent growth.
             </p>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <button onclick="openModal()" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-200">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-up animate-delay-3">
+                <button onclick="openModal()" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-200 btn-pulse">
                     Launch My Channel
                 </button>
                 <a href="#pricing" class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition">
@@ -63,120 +87,235 @@
         </div>
     </section>
 
-    <section id="pricing" class="py-24 bg-slate-50 px-6">
-        <div class="max-w-7xl mx-auto">
+    <!-- How it works -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4">Transparent Pricing</h2>
-                <p class="text-slate-500">No hidden fees. Just pure automation performance.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How Channel Pilot Works</h2>
+                <p class="text-slate-500 max-w-xl mx-auto">A simple 3-step process that turns your idea into a fully running channel.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">The Pilot Demo</h3>
-                        <p class="text-slate-500 text-sm mb-6">Perfect to see the quality before committing.</p>
-                        <div class="text-4xl font-black mb-6">$0 <span class="text-sm font-normal text-slate-400">/ One Video</span></div>
-                        <ul class="space-y-4 text-sm text-slate-600 mb-8">
-                            <li class="flex items-center gap-2">✅ 1 High-Quality Demo Video</li>
-                            <li class="flex items-center gap-2">✅ Niche Customization</li>
-                            <li class="flex items-center gap-2">✅ Professional Voiceover</li>
-                        </ul>
-                    </div>
-                    <button onclick="openModal()" class="w-full py-3 border border-blue-600 text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition">Get Free Demo</button>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 card-hover rounded-2xl">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5">1</div>
+                    <h3 class="font-bold text-lg mb-2">Choose Your Niche</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Tell us the niche you want. We research demand, competition, and monetization potential before starting.</p>
                 </div>
-                <div class="bg-blue-600 p-8 rounded-3xl text-white shadow-2xl shadow-blue-300 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-blue-500 px-4 py-1 rounded-bl-xl text-xs font-bold uppercase">Popular</div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-2">Full Automation</h3>
-                        <p class="text-blue-100 text-sm mb-6">Complete channel management on autopilot.</p>
-                        <div class="text-4xl font-black mb-6">$49 <span class="text-sm font-normal text-blue-200">/ setup fee</span></div>
-                        <p class="text-sm mb-6">+ $29/mo recurring maintenance</p>
-                        <ul class="space-y-4 text-sm text-blue-50 mb-8">
-                            <li class="flex items-center gap-2">🚀 2 High-Quality Posts Daily</li>
-                            <li class="flex items-center gap-2">🚀 Custom Identity (Email & Acc)</li>
-                            <li class="flex items-center gap-2">🚀 Telegram Status Reports</li>
-                        </ul>
-                    </div>
-                    <button onclick="openModal()" class="w-full py-3 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg">Start Full Pipeline</button>
+                <div class="text-center p-6 card-hover rounded-2xl">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5">2</div>
+                    <h3 class="font-bold text-lg mb-2">Approve the Demo</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">We create a custom high-quality demo video so you can see the exact style and quality before paying anything.</p>
+                </div>
+                <div class="text-center p-6 card-hover rounded-2xl">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5">3</div>
+                    <h3 class="font-bold text-lg mb-2">We Run Everything</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Once approved, the full pipeline activates. Research, scripting, voiceover, editing, and daily uploads are handled for you.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="faq-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full shadow-2xl animate-in fade-in zoom-in duration-300">
-            <h3 class="text-2xl font-bold mb-4 text-slate-900 text-center">Ready to Take Off? 🛫</h3>
-            <p class="text-slate-500 mb-6 text-center">Here is what happens next:</p>
-            <div class="space-y-4 mb-8">
-                <div class="flex gap-4 p-3 bg-slate-50 rounded-xl">
-                    <div class="text-xl">🛠️</div>
-                    <p class="text-sm text-slate-600">We discuss your niche on Telegram.</p>
+    <!-- Who this is for -->
+    <section class="py-20 px-6 bg-slate-50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Who This Is For</h2>
+                <p class="text-slate-500">This is built for people who want results without the daily grind.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-7 rounded-2xl border border-slate-200 card-hover">
+                    <h3 class="font-bold text-lg mb-3 text-blue-600">Perfect if you are:</h3>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li class="flex gap-3"><span class="text-blue-600 font-bold">→</span> Tired of editing every single video yourself</li>
+                        <li class="flex gap-3"><span class="text-blue-600 font-bold">→</span> Want consistent daily uploads without burnout</li>
+                        <li class="flex gap-3"><span class="text-blue-600 font-bold">→</span> Looking to run multiple faceless channels</li>
+                        <li class="flex gap-3"><span class="text-blue-600 font-bold">→</span> Prefer systems over manual work</li>
+                    </ul>
                 </div>
-                <div class="flex gap-4 p-3 bg-slate-50 rounded-xl">
-                    <div class="text-xl">📹</div>
-                    <p class="text-sm text-slate-600">We send you a custom demo video for approval.</p>
-                </div>
-                <div class="flex gap-4 p-3 bg-slate-50 rounded-xl">
-                    <div class="text-xl">⚡</div>
-                    <p class="text-sm text-slate-600">Once paid, we activate the daily posting logic.</p>
+                <div class="bg-white p-7 rounded-2xl border border-slate-200 card-hover">
+                    <h3 class="font-bold text-lg mb-3 text-slate-400">Not ideal if you are:</h3>
+                    <ul class="space-y-3 text-slate-500 text-sm">
+                        <li class="flex gap-3"><span class="font-bold">→</span> Looking for overnight viral success</li>
+                        <li class="flex gap-3"><span class="font-bold">→</span> Expecting to do zero work on strategy</li>
+                        <li class="flex gap-3"><span class="font-bold">→</span> Only interested in short-term trends</li>
+                        <li class="flex gap-3"><span class="font-bold">→</span> Unwilling to pick a real niche</li>
+                    </ul>
                 </div>
             </div>
-            <button onclick="contactPilot()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition">Continue to Telegram</button>
+        </div>
+    </section>
+
+    <!-- Demo Video -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">See the Quality Yourself</h2>
+            <p class="text-slate-500 mb-10 max-w-xl mx-auto">Here’s an example of the type of videos our system produces. Clean, professional, and ready to post.</p>
+            <div class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-900">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/YOUR_DEMO_VIDEO_ID" title="Channel Pilot Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="text-sm text-slate-400 mt-4">Replace this with your real demo video</p>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-24 px-6 bg-slate-50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-slate-500">No hidden fees. Start with a free demo or go all-in.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm card-hover flex flex-col">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Free Demo</h3>
+                        <p class="text-slate-500 text-sm mb-6">See the exact quality before you commit.</p>
+                        <div class="text-4xl font-black mb-6">$0</div>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                            <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">✓</span> 1 custom high-quality demo video</li>
+                            <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">✓</span> Niche customization</li>
+                            <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">✓</span> Professional AI voiceover</li>
+                            <li class="flex items-start gap-2"><span class="text-blue-600 font-bold">✓</span> No payment required</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal()" class="w-full py-3.5 border-2 border-blue-600 text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition mt-auto">Get Free Demo</button>
+                </div>
+                <div class="bg-blue-600 p-8 rounded-3xl text-white shadow-2xl shadow-blue-300 relative flex flex-col card-hover">
+                    <div class="absolute top-5 right-5 bg-white/20 backdrop-blur px-3 py-1 rounded-full text-xs font-bold">Most Popular</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Full Automation</h3>
+                        <p class="text-blue-100 text-sm mb-6">Complete hands-off channel management.</p>
+                        <div class="flex items-end gap-3 mb-1">
+                            <span class="text-4xl font-black">$50</span>
+                            <span class="text-blue-200 text-lg line-through mb-1">$70</span>
+                        </div>
+                        <p class="text-sm text-blue-200 mb-6">one-time setup fee</p>
+                        <ul class="space-y-3 text-sm text-blue-50 mb-8">
+                            <li class="flex items-start gap-2"><span class="font-bold">✓</span> 2 high-quality videos posted daily</li>
+                            <li class="flex items-start gap-2"><span class="font-bold">✓</span> Full channel setup + custom identity</li>
+                            <li class="flex items-start gap-2"><span class="font-bold">✓</span> Niche research & content strategy</li>
+                            <li class="flex items-start gap-2"><span class="font-bold">✓</span> Professional voiceover & 4K production</li>
+                            <li class="flex items-start gap-2"><span class="font-bold">✓</span> Ongoing management & optimization</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal()" class="w-full py-3.5 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg mt-auto">Start Full Pipeline</button>
+                </div>
+            </div>
+            <div class="mt-12 max-w-2xl mx-auto text-center bg-white border border-slate-200 rounded-2xl p-6">
+                <p class="font-semibold text-slate-800 mb-1">Quality Guarantee</p>
+                <p class="text-sm text-slate-500">You only pay after you approve the free demo video. If the quality doesn’t meet your standards, you walk away with zero cost.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="border border-slate-200 rounded-2xl p-6 card-hover">
+                    <h3 class="font-bold mb-2">Do I need any editing skills?</h3>
+                    <p class="text-slate-500 text-sm">No. Everything from scripting to final video is handled by the system. You only approve the direction and niche.</p>
+                </div>
+                <div class="border border-slate-200 rounded-2xl p-6 card-hover">
+                    <h3 class="font-bold mb-2">How long does the free demo take?</h3>
+                    <p class="text-slate-500 text-sm">Most demo videos are delivered within 24–48 hours after we confirm your niche.</p>
+                </div>
+                <div class="border border-slate-200 rounded-2xl p-6 card-hover">
+                    <h3 class="font-bold mb-2">Is the $50 a one-time payment?</h3>
+                    <p class="text-slate-500 text-sm">Yes. The $50 is a one-time setup fee to launch the full pipeline.</p>
+                </div>
+                <div class="border border-slate-200 rounded-2xl p-6 card-hover">
+                    <h3 class="font-bold mb-2">Can I run more than one channel?</h3>
+                    <p class="text-slate-500 text-sm">Yes. Many clients launch additional channels once the first one is running smoothly.</p>
+                </div>
+                <div class="border border-slate-200 rounded-2xl p-6 card-hover">
+                    <h3 class="font-bold mb-2">What if I don’t like the demo?</h3>
+                    <p class="text-slate-500 text-sm">You’re under no obligation. The demo is free so you can judge the quality risk-free before deciding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 px-6 bg-slate-900 text-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to stop editing and start growing?</h2>
+            <p class="text-slate-300 mb-8 text-lg">Get a free custom demo video first. No payment required to see the quality.</p>
+            <button onclick="openModal()" class="bg-blue-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-900/40 btn-pulse">
+                Get My Free Demo
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-10 mb-12">
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">C</div>
+                        <span class="text-lg font-bold">ChannelPilot</span>
+                    </div>
+                    <p class="text-sm text-slate-500 leading-relaxed">Professional YouTube automation for faceless channels. Built for creators who want consistency without the daily grind.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-900 mb-4">Product</h4>
+                    <ul class="space-y-3 text-sm text-slate-500">
+                        <li><a href="#pricing" class="hover:text-slate-900 transition">Pricing</a></li>
+                        <li><button onclick="openModal()" class="hover:text-slate-900 transition">Get Started</button></li>
+                        <li><a href="/about.html" class="hover:text-slate-900 transition">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-900 mb-4">Company</h4>
+                    <ul class="space-y-3 text-sm text-slate-500">
+                        <li><a href="/about.html" class="hover:text-slate-900 transition">About Us</a></li>
+                        <li><a href="/privacy.html" class="hover:text-slate-900 transition">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="hover:text-slate-900 transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-slate-900 mb-4">Contact</h4>
+                    <ul class="space-y-3 text-sm text-slate-500">
+                        <li><button onclick="openModal()" class="hover:text-slate-900 transition">Telegram</button></li>
+                        <li class="text-slate-400">Support via Telegram only</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+                <p>© 2026 Channel Pilot. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="/privacy.html" class="hover:text-slate-600 transition">Privacy</a>
+                    <a href="/terms.html" class="hover:text-slate-600 transition">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="faq-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-3xl max-w-md w-full shadow-2xl">
+            <h3 class="text-2xl font-bold mb-2 text-center">Ready to get started?</h3>
+            <p class="text-slate-500 mb-8 text-center text-sm">Here’s what happens next:</p>
+            <div class="space-y-4 mb-8">
+                <div class="flex gap-4 items-start p-4 bg-slate-50 rounded-xl">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
+                    <p class="text-sm text-slate-600 pt-1">We discuss your niche and goals.</p>
+                </div>
+                <div class="flex gap-4 items-start p-4 bg-slate-50 rounded-xl">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
+                    <p class="text-sm text-slate-600 pt-1">You receive a free custom demo video for approval.</p>
+                </div>
+                <div class="flex gap-4 items-start p-4 bg-slate-50 rounded-xl">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
+                    <p class="text-sm text-slate-600 pt-1">Once approved and paid, the full daily pipeline activates.</p>
+                </div>
+            </div>
+            <button onclick="contactPilot()" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition">Continue on Telegram</button>
             <button onclick="closeModal()" class="w-full text-slate-400 mt-4 text-sm font-medium hover:text-slate-600">Maybe later</button>
         </div>
     </div>
-
-    <section id="reviews" class="py-20 bg-white px-6">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4">Trusted by 50+ Automated Channels</h2>
-            <p class="text-slate-500">See what other "Pilots" are saying about their results.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition">
-                <div class="flex text-yellow-400 mb-4">
-                    ★★★★★
-                </div>
-                <p class="text-slate-600 italic mb-6">"I haven't opened my editing software in 3 weeks. The bot posts twice a day, and I just watch the subscriber count grow. Best investment I've made this year."</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">JD</div>
-                    <div>
-                        <h4 class="font-bold text-sm">James D.</h4>
-                        <p class="text-xs text-slate-400 text-nowrap">Finance Niche Founder</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition">
-                <div class="flex text-yellow-400 mb-4">
-                    ★★★★★
-                </div>
-                <p class="text-slate-600 italic mb-6">"The 4K quality is actually better than what I was doing manually. The niche research logic caught a trend I would have missed. Highly recommend the setup."</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">SR</div>
-                    <div>
-                        <h4 class="font-bold text-sm">Sarah R.</h4>
-                        <p class="text-xs text-slate-400 text-nowrap">AI News Channel</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-lg transition">
-                <div class="flex text-yellow-400 mb-4">
-                    ★★★★★
-                </div>
-                <p class="text-slate-600 italic mb-6">"Channel Pilot turned my side hustle into a hands-off asset. I'm already planning my third channel launch with this pipeline."</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold">MK</div>
-                    <div>
-                        <h4 class="font-bold text-sm">Marcus K.</h4>
-                        <p class="text-xs text-slate-400 text-nowrap">Lifestyle Content Agency</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
     <script>
         function openModal() {
@@ -186,8 +325,8 @@
             document.getElementById('faq-modal').classList.add('hidden');
         }
         function contactPilot() {
-            const username = "ditto_sensei"; // UPDATE THIS
-            const text = encodeURIComponent("Hello Channel Pilot! I want to launch an automated channel. I am interested in this niche: ");
+            const username = "ditto_sensei";
+            const text = encodeURIComponent("Hello Channel Pilot! I want to launch an automated channel. I'm interested in this niche: ");
             window.location.href = `https://t.me/${username}?text=${text}`;
         }
     </script>
