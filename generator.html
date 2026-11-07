@@ -1,875 +1,374 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Channel Pilot | Video Generator</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --background: #f5f7fb;
-            --surface: #fff;
-            --text: #172033;
-            --muted: #718096;
-            --border: #e5eaf2;
-            --green: #16a36a;
-            --red: #dc2626;
-            --radius: 14px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Inter, sans-serif;
-            background: var(--background);
-            color: var(--text);
-            min-height: 100vh;
-        }
-
-        button, input, select, textarea {
-            font: inherit;
-        }
-
-        button { cursor: pointer; }
-
-        .navbar {
-            min-height: 72px;
-            background: white;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6%;
-        }
-
-        .logo {
-            font-size: 21px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .logo span { color: var(--primary); }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .home-link {
-            color: var(--muted);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .account {
-            align-items: center;
-            gap: 10px;
-            padding: 7px 12px;
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .avatar {
-            width: 29px;
-            height: 29px;
-            border-radius: 50%;
-            background: #dbeafe;
-            color: var(--primary);
-            display: grid;
-            place-items: center;
-        }
-
-        .container {
-            max-width: 1160px;
-            margin: 42px auto;
-            padding: 0 24px;
-        }
-
-        .page-heading { margin-bottom: 30px; }
-
-        .page-heading h1 {
-            font-size: 28px;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-        }
-
-        .page-heading p {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: minmax(0, 1.6fr) minmax(280px, .8fr);
-            gap: 22px;
-            align-items: start;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .card-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 23px;
-        }
-
-        .card-heading h2 {
-            font-size: 17px;
-            letter-spacing: -.4px;
-        }
-
-        .card-heading p {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
-        .badge {
-            background: #eff6ff;
-            color: var(--primary);
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .badge.success {
-            background: #eaf8f0;
-            color: #12834f;
-        }
-
-        .badge.warning {
-            background: #fff7ed;
-            color: #c2410c;
-        }
-
-        .field { margin-bottom: 20px; }
-
-        .field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 9px;
-        }
-
-        .field small {
-            display: block;
-            color: var(--muted);
-            font-size: 11px;
-            margin-top: 7px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            padding: 13px 14px;
-            background: white;
-            outline: none;
-            color: var(--text);
-            font-size: 13px;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--primary);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 105px;
-        }
-
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .primary-button {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 9px;
-            padding: 14px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .primary-button:hover { background: var(--primary-dark); }
-
-        .primary-button:disabled {
-            opacity: .55;
-            cursor: not-allowed;
-        }
-
-        .secondary-button {
-            background: #eff6ff;
-            color: var(--primary);
-            border: 0;
-            border-radius: 9px;
-            padding: 12px 15px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .notice {
-            background: #f0f6ff;
-            color: #315b9b;
-            border: 1px solid #dbeafe;
-            border-radius: 9px;
-            padding: 12px;
-            margin-top: 14px;
-            font-size: 11px;
-            line-height: 1.6;
-        }
-
-        .message {
-            display: none;
-            padding: 12px;
-            margin-top: 13px;
-            border-radius: 9px;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .message.success {
-            display: block;
-            background: #eaf8f0;
-            color: #12834f;
-        }
-
-        .message.error {
-            display: block;
-            background: #fef2f2;
-            color: #b91c1c;
-        }
-
-        .message.info {
-            display: block;
-            background: #eff6ff;
-            color: #1d4ed8;
-        }
-
-        .status-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 13px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 12px;
-        }
-
-        .status-row:last-child { border: none; }
-
-        .status-label { color: var(--muted); }
-
-        .status-value { font-weight: 600; }
-
-        .license-active {
-            display: none;
-            margin-top: 12px;
-        }
-
-        .license-active p {
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        .history-empty {
-            text-align: center;
-            padding: 25px 10px;
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .job-panel { display: none; }
-
-        .job-panel.active { display: block; }
-
-        .footer {
-            text-align: center;
-            padding: 30px 15px;
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        @media (max-width: 800px) {
-            .dashboard { grid-template-columns: 1fr; }
-            .container { margin-top: 28px; }
-        }
-
-        @media (max-width: 500px) {
-            .navbar { padding: 0 16px; }
-            .home-link { display: none; }
-            .container { padding: 0 14px; }
-            .card { padding: 19px; }
-            .page-heading h1 { font-size: 24px; }
-            .two-columns { grid-template-columns: 1fr; gap: 0; }
-            .account { gap: 6px; padding: 5px 8px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Channel Pilot | Video Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#2563eb;--primary-dark:#1d4ed8;--background:#f5f7fb;--surface:#fff;--text:#172033;--muted:#718096;--border:#e5eaf2;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--background);color:var(--text);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.navbar{min-height:72px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 6%}
+.logo{font-size:21px;font-weight:800;letter-spacing:-1px}.logo span{color:var(--primary)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.home-link{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}
+.account{align-items:center;gap:10px;padding:7px 12px;border:1px solid var(--border);border-radius:30px;font-size:12px;font-weight:600}
+.avatar{width:29px;height:29px;border-radius:50%;background:#dbeafe;color:var(--primary);display:grid;place-items:center}
+.container{max-width:1160px;margin:42px auto;padding:0 24px}
+.page-heading{margin-bottom:30px}.page-heading h1{font-size:28px;letter-spacing:-1px;margin-bottom:8px}.page-heading p{color:var(--muted);font-size:14px}
+.dashboard{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr);gap:22px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:25px;margin-bottom:20px}
+.card-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}
+.card-heading h2,.card>h2{font-size:17px;letter-spacing:-.4px}
+.card-heading p{color:var(--muted);font-size:12px;margin-top:5px}
+.badge{background:#eff6ff;color:var(--primary);padding:6px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge.success{background:#eaf8f0;color:#12834f}.badge.warning{background:#fff7ed;color:#c2410c}
+.field{margin-bottom:20px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:9px}
+.field small{display:block;color:var(--muted);font-size:11px;margin-top:7px}
+input,select{width:100%;border:1px solid var(--border);border-radius:9px;padding:13px 14px;background:#fff;outline:none;color:var(--text);font-size:13px}
+input:focus,select:focus{border-color:var(--primary)}
+.primary-button{width:100%;background:var(--primary);color:#fff;border:none;border-radius:9px;padding:14px;font-size:13px;font-weight:700}
+.primary-button:hover{background:var(--primary-dark)}.primary-button:disabled{opacity:.55;cursor:not-allowed}
+.notice{background:#f0f6ff;color:#315b9b;border:1px solid #dbeafe;border-radius:9px;padding:12px;margin-top:14px;font-size:11px;line-height:1.6}
+.message{display:none;padding:12px;margin-top:13px;border-radius:9px;font-size:12px;line-height:1.5}
+.message.success{display:block;background:#eaf8f0;color:#12834f}
+.message.error{display:block;background:#fef2f2;color:#b91c1c}
+.message.info{display:block;background:#eff6ff;color:#1d4ed8}
+.status-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border);font-size:12px}
+.status-row:last-child{border:none}.status-label{color:var(--muted)}.status-value{font-weight:600}
+.license-active{display:none;margin-top:12px}.license-active p{color:var(--muted);font-size:12px;line-height:1.6}
+.history-empty{text-align:center;padding:25px 10px;color:var(--muted);font-size:12px}
+.job-panel{display:none}.job-panel.active{display:block}
+.job-panel p{margin:10px 0 14px;font-size:13px;color:var(--muted);line-height:1.6}
+.dl-button{background:var(--primary);color:#fff;border:0;border-radius:9px;padding:11px 16px;font-size:12px;font-weight:700}
+.history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:12px}
+.history-item:last-child{border:none}.history-item small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.history-item button{background:#eff6ff;color:var(--primary);border:0;border-radius:8px;padding:7px 11px;font-size:11px;font-weight:700}
+.footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:11px}
+@media(max-width:800px){.dashboard{grid-template-columns:1fr}.container{margin-top:28px}}
+@media(max-width:500px){.navbar{padding:0 16px}.home-link{display:none}.container{padding:0 14px}.card{padding:19px}.page-heading h1{font-size:24px}.account{gap:6px;padding:5px 8px}}
+</style>
 </head>
-
 <body>
 
 <nav class="navbar">
-    <div class="logo">Channel<span>Pilot.</span></div>
-
-    <div class="nav-right">
-        <a href="index.html" class="home-link">Back to website</a>
-
-        <button
-            id="signInButton"
-            class="primary-button"
-            style="width:auto;padding:10px 16px"
-            type="button"
-        >
-            Continue with Google
-        </button>
-
-        <div class="account" id="accountBox" style="display:none">
-            <div class="avatar" id="avatar">?</div>
-            <span id="accountName">Customer</span>
-            <button
-                id="signOutButton"
-                type="button"
-                style="border:0;background:none;color:#2563eb;font-size:12px;font-weight:600"
-            >
-                Sign out
-            </button>
-        </div>
+  <div class="logo">Channel<span>Pilot.</span></div>
+  <div class="nav-right">
+    <a href="index.html" class="home-link">Back to website</a>
+    <button id="signInButton" class="primary-button" style="width:auto;padding:10px 16px" type="button">Continue with Google</button>
+    <div class="account" id="accountBox" style="display:none">
+      <div class="avatar" id="avatar">?</div>
+      <span id="accountName">Customer</span>
+      <button id="signOutButton" type="button" style="border:0;background:none;color:#2563eb;font-size:12px;font-weight:600">Sign out</button>
     </div>
+  </div>
 </nav>
 
 <main class="container">
+  <div class="page-heading">
+    <h1>Video Generator</h1>
+    <p>Create and manage your automated videos from one place.</p>
+  </div>
 
-    <div class="page-heading">
-        <h1>Video Generator</h1>
-        <p>Create and manage your automated videos from one place.</p>
-    </div>
+  <div class="dashboard">
+    <section>
+      <div class="card">
+        <div class="card-heading">
+          <div><h2>Create a new video</h2><p>Pick a category and we'll write, voice and render the video.</p></div>
+          <span class="badge">AI Generator</span>
+        </div>
+        <form id="generatorForm">
+          <div class="field">
+            <label for="category">Video category</label>
+            <select id="category"><option value="">Loading categories...</option></select>
+            <small id="categoryDesc"></small>
+          </div>
+          <button type="submit" class="primary-button" id="generateButton">Generate Video</button>
+          <div class="notice">You need an active license to generate videos. Each account can generate 2 videos per day. Finished videos are kept for 24 hours, so download yours before then.</div>
+          <div id="generationMessage" class="message"></div>
+        </form>
+      </div>
 
-    <div class="dashboard">
+      <div class="card job-panel" id="jobPanel">
+        <h2>Generation status</h2>
+        <p id="jobStatus">Waiting for generation service.</p>
+        <button type="button" class="dl-button" id="jobDownload" style="display:none">Download video</button>
+      </div>
+    </section>
 
-        <section>
+    <aside>
+      <div class="card">
+        <div class="card-heading">
+          <div><h2>License activation</h2><p>Manage your Channel Pilot license.</p></div>
+          <span class="badge warning" id="licenseBadge">Inactive</span>
+        </div>
+        <div id="licenseForm">
+          <div class="field">
+            <label for="licenseKey">License key</label>
+            <input type="text" id="licenseKey" placeholder="CP-XXXX-XXXX-XXXX-XXXX" autocomplete="off">
+            <small>Enter the license key you received after purchasing.</small>
+          </div>
+          <button class="primary-button" type="button" id="redeemButton">Redeem license</button>
+          <div id="licenseMessage" class="message"></div>
+        </div>
+        <div class="license-active" id="licenseActive">
+          <p>Your license is linked to your account. You don't need to enter your key again, including when using another device.</p>
+        </div>
+      </div>
 
-            <div class="card">
-                <div class="card-heading">
-                    <div>
-                        <h2>Create a new video</h2>
-                        <p>Configure the video you want to generate.</p>
-                    </div>
-                    <span class="badge">AI Generator</span>
-                </div>
+      <div class="card">
+        <div class="card-heading"><div><h2>Account</h2><p>Your account information.</p></div></div>
+        <div class="status-row"><span class="status-label">Account</span><span class="status-value" id="accountStatus">Guest</span></div>
+        <div class="status-row"><span class="status-label">License</span><span class="status-value" id="licenseStatus">Not linked</span></div>
+        <div class="status-row"><span class="status-label">Videos left today</span><span class="status-value" id="usageLeft">-</span></div>
+      </div>
 
-                <form id="generatorForm">
-
-                    <div class="field">
-                        <label for="topic">Video topic</label>
-                        <textarea
-                            id="topic"
-                            placeholder="Describe the subject of your video..."
-                            required
-                            maxlength="1000"
-                        ></textarea>
-                    </div>
-
-                    <div class="two-columns">
-                        <div class="field">
-                            <label for="format">Video format</label>
-                            <select id="format">
-                                <option value="Shorts">YouTube Shorts</option>
-                                <option value="TikTok">TikTok</option>
-                                <option value="Reels">Instagram Reels</option>
-                                <option value="Landscape">YouTube Landscape</option>
-                            </select>
-                        </div>
-
-                        <div class="field">
-                            <label for="style">Content style</label>
-                            <select id="style">
-                                <option value="Documentary">Documentary</option>
-                                <option value="Storytelling">Storytelling</option>
-                                <option value="Educational">Educational</option>
-                                <option value="Mystery">Mystery</option>
-                                <option value="Top 10">Top 10</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="field">
-                        <label for="language">Narration language</label>
-                        <select id="language">
-                            <option value="English">English</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="primary-button" id="generateButton">
-                        Generate Video
-                    </button>
-
-                    <div class="notice">
-                        You need an active license linked to your account before
-                        generating videos.
-                    </div>
-
-                    <div id="generationMessage" class="message"></div>
-
-                </form>
-            </div>
-
-            <div class="card job-panel" id="jobPanel">
-                <h2>Generation status</h2>
-                <p id="jobStatus">Waiting for generation service.</p>
-            </div>
-
-        </section>
-
-        <aside>
-
-            <!-- LICENSE ACTIVATION -->
-            <div class="card">
-
-                <div class="card-heading">
-                    <div>
-                        <h2>License activation</h2>
-                        <p>Manage your Channel Pilot license.</p>
-                    </div>
-                    <span class="badge warning" id="licenseBadge">Inactive</span>
-                </div>
-
-                <div id="licenseForm">
-                    <div class="field">
-                        <label for="licenseKey">License key</label>
-                        <input
-                            type="text"
-                            id="licenseKey"
-                            placeholder="CP-XXXX-XXXX-XXXX-XXXX"
-                            autocomplete="off"
-                        />
-                        <small>
-                            Enter the license key you received after purchasing.
-                        </small>
-                    </div>
-
-                    <button
-                        class="primary-button"
-                        type="button"
-                        id="redeemButton"
-                    >
-                        Redeem license
-                    </button>
-
-                    <div id="licenseMessage" class="message"></div>
-                </div>
-
-                <div class="license-active" id="licenseActive">
-                    <p>
-                        Your license is linked to your account. You don't need
-                        to enter your key again, including when using another device.
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- ACCOUNT INFORMATION -->
-            <div class="card">
-                <div class="card-heading">
-                    <div>
-                        <h2>Account</h2>
-                        <p>Your account information.</p>
-                    </div>
-                </div>
-
-                <div class="status-row">
-                    <span class="status-label">Account</span>
-                    <span class="status-value" id="accountStatus">Guest</span>
-                </div>
-
-                <div class="status-row">
-                    <span class="status-label">License</span>
-                    <span class="status-value" id="licenseStatus">Not linked</span>
-                </div>
-            </div>
-
-            <!-- HISTORY -->
-            <div class="card">
-                <div class="card-heading">
-                    <div>
-                        <h2>Recent generations</h2>
-                        <p>Your previous videos.</p>
-                    </div>
-                </div>
-
-                <div class="history-empty">
-                    Your generated videos will appear here.
-                </div>
-            </div>
-
-        </aside>
-
-    </div>
+      <div class="card">
+        <div class="card-heading"><div><h2>Recent generations</h2><p>Your previous videos.</p></div></div>
+        <div id="historyList"><div class="history-empty">Your generated videos will appear here.</div></div>
+      </div>
+    </aside>
+  </div>
 </main>
 
-<footer class="footer">
-    Channel Pilot &copy; 2026. All rights reserved.
-</footer>
+<footer class="footer">Channel Pilot &copy; 2026. All rights reserved.</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-    // ==========================================
-    // SUPABASE CONFIGURATION
-    // ==========================================
+const SUPABASE_URL = "https://tepgxubkncdlcklapptz.supabase.co";
+const SUPABASE_KEY = "sb_publishable_pXRlaLZG0qpB2gBJ9I0-ig_w9wznqIY";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const SUPABASE_URL = "https://tepgxubkncdlcklapptz.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_pXRlaLZG0qpB2gBJ9I0-ig_w9wznqIY";
+const DAILY_LIMIT = 2;
+const $ = (id) => document.getElementById(id);
+const signInButton = $("signInButton"), signOutButton = $("signOutButton"), accountBox = $("accountBox");
+const licenseForm = $("licenseForm"), licenseActive = $("licenseActive"), licenseKeyInput = $("licenseKey");
+const redeemButton = $("redeemButton"), licenseMessage = $("licenseMessage"), generationMessage = $("generationMessage");
+const generateButton = $("generateButton"), categorySelect = $("category");
 
-    const supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+let currentUser = null, hasActiveLicense = false;
+let pollTimer = null, latestJobs = [], usedToday = 0, hasActiveJob = false;
+let categoryInfo = {};
 
-    // ==========================================
-    // ELEMENTS
-    // ==========================================
+function showMessage(el, msg, type) { el.textContent = msg; el.className = "message " + type; }
+function clearMessage(el) { el.textContent = ""; el.className = "message"; }
 
-    const signInButton = document.getElementById("signInButton");
-    const signOutButton = document.getElementById("signOutButton");
-    const accountBox = document.getElementById("accountBox");
+// ---------- CATEGORIES ----------
+async function loadCategories() {
+  const { data, error } = await supabaseClient.from("categories")
+    .select("name,description").eq("active", true).order("sort");
+  categorySelect.replaceChildren();
+  if (error || !data || !data.length) {
+    console.error("Categories error:", error);
+    const o = document.createElement("option"); o.value = ""; o.textContent = "Categories unavailable";
+    categorySelect.appendChild(o); updateGenerateButton(); return;
+  }
+  data.forEach((c) => {
+    categoryInfo[c.name] = c.description;
+    const o = document.createElement("option"); o.value = c.name; o.textContent = c.name;
+    categorySelect.appendChild(o);
+  });
+  showCategoryDesc(); updateGenerateButton();
+}
+function showCategoryDesc() { $("categoryDesc").textContent = categoryInfo[categorySelect.value] || ""; }
+categorySelect.addEventListener("change", showCategoryDesc);
 
-    const licenseForm = document.getElementById("licenseForm");
-    const licenseActive = document.getElementById("licenseActive");
-    const licenseKeyInput = document.getElementById("licenseKey");
-    const redeemButton = document.getElementById("redeemButton");
+// ---------- AUTH ----------
+async function signIn() {
+  signInButton.disabled = true; signInButton.textContent = "Redirecting...";
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: "google", options: { redirectTo: window.location.origin + "/generator.html" }
+  });
+  if (error) {
+    console.error("Login error:", error);
+    signInButton.disabled = false; signInButton.textContent = "Continue with Google";
+    alert("Login failed: " + error.message);
+  }
+}
+async function signOut() {
+  const { error } = await supabaseClient.auth.signOut();
+  if (error) { alert("Sign-out failed: " + error.message); return; }
+  window.location.reload();
+}
 
-    const licenseMessage = document.getElementById("licenseMessage");
-    const generationMessage = document.getElementById("generationMessage");
+// ---------- LICENSE ----------
+async function refreshLicenseStatus() {
+  if (!currentUser) { hasActiveLicense = false; displayLicenseStatus(false); return; }
+  const { data, error } = await supabaseClient.rpc("get_my_license_status");
+  if (error) {
+    console.error("License status error:", error);
+    showMessage(licenseMessage, "Unable to check your license. Please refresh the page.", "error");
+    return;
+  }
+  hasActiveLicense = data?.active === true;
+  displayLicenseStatus(hasActiveLicense);
+}
+function displayLicenseStatus(active) {
+  const badge = $("licenseBadge"), status = $("licenseStatus");
+  if (active) {
+    badge.textContent = "Active"; badge.className = "badge success"; status.textContent = "Active";
+    licenseForm.style.display = "none"; licenseActive.style.display = "block";
+  } else {
+    badge.textContent = "Inactive"; badge.className = "badge warning"; status.textContent = "Not linked";
+    licenseForm.style.display = "block"; licenseActive.style.display = "none";
+  }
+}
+async function redeemLicense() {
+  clearMessage(licenseMessage);
+  if (!currentUser) return showMessage(licenseMessage, "Sign in with Google before redeeming a license.", "error");
+  if (hasActiveLicense) return showMessage(licenseMessage, "Your account already has an active license.", "success");
+  const licenseKey = licenseKeyInput.value.trim();
+  if (!licenseKey) return showMessage(licenseMessage, "Please enter your license key.", "error");
 
-    let currentUser = null;
-    let hasActiveLicense = false;
+  redeemButton.disabled = true; redeemButton.textContent = "Checking license...";
+  try {
+    const { data, error } = await supabaseClient.rpc("redeem_license", { p_license_key: licenseKey });
+    if (error) { console.error("Redemption error:", error); return showMessage(licenseMessage, "Could not redeem license. Please try again.", "error"); }
+    if (!data.success) return showMessage(licenseMessage, data.message || "License redemption failed.", "error");
+    licenseKeyInput.value = "";
+    showMessage(licenseMessage, data.message, "success");
+    await refreshLicenseStatus();
+  } catch (e) {
+    console.error(e);
+    showMessage(licenseMessage, "An unexpected error occurred. Please try again.", "error");
+  } finally {
+    redeemButton.disabled = false; redeemButton.textContent = "Redeem license";
+  }
+}
 
-    // ==========================================
-    // MESSAGE DISPLAY
-    // ==========================================
+// ---------- JOBS ----------
+function todayUTC() { return new Date().toISOString().slice(0, 10); }
 
-    function showMessage(element, message, type) {
-        element.textContent = message;
-        element.className = "message " + type;
+function updateGenerateButton() {
+  const left = Math.max(0, DAILY_LIMIT - usedToday);
+  $("usageLeft").textContent = currentUser ? left + " of " + DAILY_LIMIT : "-";
+  generateButton.disabled = !categorySelect.value || (!!currentUser && (hasActiveJob || left === 0));
+  generateButton.textContent = hasActiveJob ? "Video in progress..." : "Generate Video";
+}
+
+async function downloadVideo(path, btn) {
+  const label = btn.textContent; btn.disabled = true; btn.textContent = "Preparing...";
+  const { data, error } = await supabaseClient.storage.from("videos").createSignedUrl(path, 300, { download: "video.mp4" });
+  btn.disabled = false; btn.textContent = label;
+  if (error || !data) return showMessage(generationMessage, "Could not prepare the download. The video may have expired.", "error");
+  const a = document.createElement("a"); a.href = data.signedUrl; a.download = "video.mp4";
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+async function renderJobPanel(job) {
+  const panel = $("jobPanel"), text = $("jobStatus"), dl = $("jobDownload");
+  if (!job) { panel.classList.remove("active"); return; }
+  panel.classList.add("active"); dl.style.display = "none";
+  if (job.status === "queued") {
+    const { data } = await supabaseClient.rpc("get_queue_position", { p_job_id: job.id });
+    text.textContent = "Your video is queued" + (data ? " (position " + data + ")" : "") + ". The generator is starting up, which can take a few minutes. You can leave this page and come back.";
+  } else if (job.status === "running") {
+    text.textContent = "Your video is being generated. This can take several minutes.";
+  } else if (job.status === "completed" && job.video_path) {
+    text.textContent = "Your " + job.category + " video is ready.";
+    dl.style.display = "inline-block"; dl.onclick = () => downloadVideo(job.video_path, dl);
+  } else if (job.status === "completed") {
+    text.textContent = "This video has expired and was removed.";
+  } else {
+    text.textContent = "Generation failed. This did not count toward your daily limit, so you can try again.";
+  }
+}
+
+function renderHistory(jobs) {
+  const list = $("historyList"); list.replaceChildren();
+  if (!jobs.length) {
+    const d = document.createElement("div"); d.className = "history-empty";
+    d.textContent = "Your generated videos will appear here."; list.appendChild(d); return;
+  }
+  jobs.slice(0, 5).forEach((j) => {
+    const row = document.createElement("div"); row.className = "history-item";
+    const info = document.createElement("div");
+    info.textContent = j.category;
+    const sub = document.createElement("small");
+    const state = j.status === "completed" && !j.video_path ? "expired" : j.status;
+    sub.textContent = new Date(j.created_at).toLocaleString() + " · " + state;
+    info.appendChild(sub); row.appendChild(info);
+    if (j.status === "completed" && j.video_path) {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = "Download";
+      b.onclick = () => downloadVideo(j.video_path, b); row.appendChild(b);
     }
-
-    function clearMessage(element) {
-        element.textContent = "";
-        element.className = "message";
-    }
-
-    // ==========================================
-    // GOOGLE AUTHENTICATION
-    // ==========================================
-
-    async function signIn() {
-        signInButton.disabled = true;
-        signInButton.textContent = "Redirecting...";
-
-        const { error } = await supabaseClient.auth.signInWithOAuth({
-            provider: "google",
-            options: {
-                redirectTo: window.location.origin + "/generator.html"
-            }
-        });
-
-        if (error) {
-            console.error("Login error:", error);
-
-            signInButton.disabled = false;
-            signInButton.textContent = "Continue with Google";
-
-            alert("Login failed: " + error.message);
-        }
-    }
-
-    async function signOut() {
-        const { error } = await supabaseClient.auth.signOut();
-
-        if (error) {
-            alert("Sign-out failed: " + error.message);
-            return;
-        }
-
-        window.location.reload();
-    }
-
-    // ==========================================
-    // LICENSE STATUS
-    // ==========================================
-
-    async function refreshLicenseStatus() {
-        if (!currentUser) {
-            hasActiveLicense = false;
-            displayLicenseStatus(false);
-            return;
-        }
-
-        const { data, error } = await supabaseClient.rpc(
-            "get_my_license_status"
-        );
-
-        if (error) {
-            console.error("License status error:", error);
-
-            showMessage(
-                licenseMessage,
-                "Unable to check your license. Please refresh the page.",
-                "error"
-            );
-
-            return;
-        }
-
-        hasActiveLicense = data?.active === true;
-
-        displayLicenseStatus(hasActiveLicense);
-    }
-
-    function displayLicenseStatus(active) {
-        const badge = document.getElementById("licenseBadge");
-        const status = document.getElementById("licenseStatus");
-
-        if (active) {
-            badge.textContent = "Active";
-            badge.className = "badge success";
-
-            status.textContent = "Active";
-
-            licenseForm.style.display = "none";
-            licenseActive.style.display = "block";
-        } else {
-            badge.textContent = "Inactive";
-            badge.className = "badge warning";
-
-            status.textContent = "Not linked";
-
-            licenseForm.style.display = "block";
-            licenseActive.style.display = "none";
-        }
-    }
-
-    // ==========================================
-    // REDEEM LICENSE
-    // ==========================================
-
-    async function redeemLicense() {
-        clearMessage(licenseMessage);
-
-        if (!currentUser) {
-            showMessage(
-                licenseMessage,
-                "Sign in with Google before redeeming a license.",
-                "error"
-            );
-            return;
-        }
-
-        // An existing license means there is nothing else to redeem.
-        if (hasActiveLicense) {
-            showMessage(
-                licenseMessage,
-                "Your account already has an active license.",
-                "success"
-            );
-            return;
-        }
-
-        const licenseKey = licenseKeyInput.value.trim();
-
-        if (!licenseKey) {
-            showMessage(
-                licenseMessage,
-                "Please enter your license key.",
-                "error"
-            );
-            return;
-        }
-
-        redeemButton.disabled = true;
-        redeemButton.textContent = "Checking license...";
-
-        try {
-            const { data, error } = await supabaseClient.rpc(
-                "redeem_license",
-                {
-                    p_license_key: licenseKey
-                }
-            );
-
-            if (error) {
-                console.error("Redemption error:", error);
-                showMessage(
-                    licenseMessage,
-                    "Could not redeem license. Please try again.",
-                    "error"
-                );
-                return;
-            }
-
-            if (!data.success) {
-                showMessage(
-                    licenseMessage,
-                    data.message || "License redemption failed.",
-                    "error"
-                );
-                return;
-            }
-
-            licenseKeyInput.value = "";
-
-            showMessage(
-                licenseMessage,
-                data.message,
-                "success"
-            );
-
-            await refreshLicenseStatus();
-
-        } catch (error) {
-            console.error(error);
-
-            showMessage(
-                licenseMessage,
-                "An unexpected error occurred. Please try again.",
-                "error"
-            );
-        } finally {
-            redeemButton.disabled = false;
-            redeemButton.textContent = "Redeem license";
-        }
-    }
-
-    // ==========================================
-    // CHECK CUSTOMER SESSION
-    // ==========================================
-
-    async function checkSession() {
-        const { data, error } =
-            await supabaseClient.auth.getSession();
-
-        if (error) {
-            console.error("Session error:", error);
-            return;
-        }
-
-        currentUser = data.session?.user || null;
-
-        if (!currentUser) {
-            signInButton.style.display = "block";
-            accountBox.style.display = "none";
-
-            document.getElementById("accountStatus").textContent = "Guest";
-
-            hasActiveLicense = false;
-            displayLicenseStatus(false);
-
-            return;
-        }
-
-        signInButton.style.display = "none";
-        accountBox.style.display = "flex";
-
-        const email = currentUser.email || "Customer";
-
-        document.getElementById("accountName").textContent = email;
-
-        document.getElementById("avatar").textContent =
-            email.charAt(0).toUpperCase();
-
-        document.getElementById("accountStatus").textContent =
-            "Signed in";
-
-        await refreshLicenseStatus();
-    }
-
-    // ==========================================
-    // GENERATION ACCESS CHECK
-    // ==========================================
-
-    document.getElementById("generatorForm")
-        .addEventListener("submit", async function(event) {
-
-            event.preventDefault();
-
-            clearMessage(generationMessage);
-
-            if (!currentUser) {
-                showMessage(
-                    generationMessage,
-                    "Please sign in with Google first.",
-                    "error"
-                );
-                return;
-            }
-
-            // Always verify against Supabase before allowing generation.
-            await refreshLicenseStatus();
-
-            if (!hasActiveLicense) {
-                showMessage(
-                    generationMessage,
-                    "You need an active license before generating videos. Redeem your license in the sidebar.",
-                    "error"
-                );
-
-                licenseKeyInput.focus();
-                return;
-            }
-
-            showMessage(
-                generationMessage,
-                "Your license is active. The video generation backend has not been connected yet.",
-                "info"
-            );
-
-            // Generation API will be connected in the next stage.
-        });
-
-    // ==========================================
-    // EVENT LISTENERS
-    // ==========================================
-
-    signInButton.addEventListener("click", signIn);
-    signOutButton.addEventListener("click", signOut);
-    redeemButton.addEventListener("click", redeemLicense);
-
-    supabaseClient.auth.onAuthStateChange(() => {
-        // Run after the auth callback has finished.
-        setTimeout(checkSession, 0);
-    });
-
-    // INITIAL LOAD
-    checkSession();
-
+    list.appendChild(row);
+  });
+}
+
+async function loadJobs() {
+  if (!currentUser) { latestJobs = []; usedToday = 0; hasActiveJob = false; renderHistory([]); renderJobPanel(null); updateGenerateButton(); return; }
+  const { data, error } = await supabaseClient.from("generation_jobs")
+    .select("id,status,category,video_path,usage_day,created_at")
+    .order("created_at", { ascending: false }).limit(20);
+  if (error) { console.error("Jobs error:", error); return; }
+
+  latestJobs = data || [];
+  const today = todayUTC();
+  usedToday = latestJobs.filter((j) => j.usage_day === today && j.status !== "failed").length;
+  const active = latestJobs.find((j) => j.status === "queued" || j.status === "running");
+  hasActiveJob = !!active;
+
+  renderHistory(latestJobs);
+  await renderJobPanel(active || latestJobs[0] || null);
+  updateGenerateButton();
+
+  if (active && !pollTimer) pollTimer = setInterval(loadJobs, 5000);
+  if (!active && pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+}
+
+$("generatorForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  clearMessage(generationMessage);
+  if (!currentUser) return showMessage(generationMessage, "Please sign in with Google first.", "error");
+
+  await refreshLicenseStatus();
+  if (!hasActiveLicense) {
+    showMessage(generationMessage, "You need an active license before generating videos. Redeem your license in the sidebar.", "error");
+    licenseKeyInput.focus(); return;
+  }
+
+  generateButton.disabled = true; generateButton.textContent = "Submitting...";
+  try {
+    const { data, error } = await supabaseClient.rpc("enqueue_generation", { p_category: categorySelect.value });
+    if (error) { console.error(error); showMessage(generationMessage, "Could not start generation. Please try again.", "error"); }
+    else if (!data.success) showMessage(generationMessage, data.message, "error");
+    else showMessage(generationMessage, data.message, "success");
+  } finally {
+    await loadJobs();
+  }
+});
+
+// ---------- SESSION ----------
+async function checkSession() {
+  const { data, error } = await supabaseClient.auth.getSession();
+  if (error) { console.error("Session error:", error); return; }
+  currentUser = data.session?.user || null;
+
+  if (!currentUser) {
+    signInButton.style.display = "block"; accountBox.style.display = "none";
+    $("accountStatus").textContent = "Guest";
+    hasActiveLicense = false; displayLicenseStatus(false); await loadJobs();
+    return;
+  }
+  signInButton.style.display = "none"; accountBox.style.display = "flex";
+  const email = currentUser.email || "Customer";
+  $("accountName").textContent = email;
+  $("avatar").textContent = email.charAt(0).toUpperCase();
+  $("accountStatus").textContent = "Signed in";
+  await refreshLicenseStatus();
+  await loadJobs();
+}
+
+signInButton.addEventListener("click", signIn);
+signOutButton.addEventListener("click", signOut);
+redeemButton.addEventListener("click", redeemLicense);
+supabaseClient.auth.onAuthStateChange(() => { setTimeout(checkSession, 0); });
+loadCategories();
+checkSession();
 </script>
-
 </body>
 </html>
