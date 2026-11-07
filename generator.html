@@ -1,0 +1,793 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel Pilot | Video Generator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --background: #f5f7fb;
+            --surface: #ffffff;
+            --text: #172033;
+            --muted: #718096;
+            --border: #e5eaf2;
+            --green: #16a36a;
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button, input, select, textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .navbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .home-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: var(--primary);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1160px;
+            margin: 42px auto;
+            padding: 0 24px;
+        }
+
+        .page-heading {
+            margin-bottom: 30px;
+        }
+
+        .page-heading h1 {
+            font-size: 28px;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 23px;
+        }
+
+        .card-heading h2 {
+            font-size: 17px;
+            letter-spacing: -0.4px;
+        }
+
+        .card-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .badge {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .field {
+            margin-bottom: 21px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 9px;
+        }
+
+        .field small {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 13px 14px;
+            background: #fff;
+            outline: none;
+            color: var(--text);
+            font-size: 13px;
+            transition: border .2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 105px;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .primary-button {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: background .2s;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+        }
+
+        .primary-button:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        .notice {
+            background: #f0f6ff;
+            color: #315b9b;
+            border: 1px solid #dbeafe;
+            border-radius: 9px;
+            padding: 12px;
+            margin-top: 14px;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .usage-card {
+            background: linear-gradient(135deg, #2563eb, #1745b4);
+            color: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .usage-card .label {
+            font-size: 12px;
+            opacity: .85;
+        }
+
+        .usage-number {
+            font-size: 35px;
+            font-weight: 800;
+            margin: 12px 0 4px;
+        }
+
+        .usage-number span {
+            font-size: 15px;
+            font-weight: 500;
+            opacity: .75;
+        }
+
+        .usage-card p {
+            font-size: 11px;
+            opacity: .8;
+        }
+
+        .usage-track {
+            height: 6px;
+            background: rgba(255,255,255,.2);
+            border-radius: 10px;
+            margin-top: 18px;
+            overflow: hidden;
+        }
+
+        .usage-fill {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            transition: width .3s;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+        }
+
+        .status-row:last-child {
+            border: none;
+        }
+
+        .status-label {
+            color: var(--muted);
+        }
+
+        .status-value {
+            font-weight: 600;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            margin-right: 6px;
+        }
+
+        .history-empty {
+            text-align: center;
+            padding: 25px 10px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .history-item {
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .history-item:last-child {
+            border: none;
+        }
+
+        .history-item strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .history-item span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .job-panel {
+            display: none;
+        }
+
+        .job-panel.active {
+            display: block;
+        }
+
+        .job-status {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #edf0f5;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            transition: width .4s;
+        }
+
+        .download-button {
+            display: block;
+            text-align: center;
+            background: #eaf8f0;
+            color: #12834f;
+            text-decoration: none;
+            padding: 13px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        @media (max-width: 800px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                margin-top: 28px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .navbar {
+                padding: 0 16px;
+            }
+
+            .home-link {
+                display: none;
+            }
+
+            .container {
+                padding: 0 14px;
+            }
+
+            .card {
+                padding: 19px;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Channel<span>Pilot.</span></div>
+
+        <div class="nav-right">
+            <a href="index.html" class="home-link">Back to website</a>
+
+             <div class="account" id="accountBox" style="display:none">
+                <div class="avatar" id="avatar">?</div>
+                <span id="accountName">Customer</span>
+                <button id="signOutButton">Sign out</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-heading">
+            <h1>Video Generator</h1>
+            <p>Create and manage your automated videos from one place.</p>
+        </div>
+
+        <div class="dashboard">
+
+            <!-- MAIN GENERATOR -->
+            <section>
+
+                <div class="card">
+                    <div class="card-heading">
+                        <div>
+                            <h2>Create a new video</h2>
+                            <p>Configure the video you want to generate.</p>
+                        </div>
+                        <span class="badge">AI Generator</span>
+                    </div>
+
+                    <form id="generatorForm">
+
+                        <div class="field">
+                            <label for="topic">Video topic</label>
+                            <textarea
+                                id="topic"
+                                placeholder="Example: The mysterious disappearance of the Roman Ninth Legion..."
+                                required
+                                maxlength="1000"
+                            ></textarea>
+                            <small>Describe the subject of your video.</small>
+                        </div>
+
+                        <div class="two-columns">
+
+                            <div class="field">
+                                <label for="format">Video format</label>
+                                <select id="format">
+                                    <option value="Shorts">YouTube Shorts</option>
+                                    <option value="TikTok">TikTok</option>
+                                    <option value="Reels">Instagram Reels</option>
+                                    <option value="Landscape">YouTube Landscape</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="style">Content style</label>
+                                <select id="style">
+                                    <option value="Documentary">Documentary</option>
+                                    <option value="Storytelling">Storytelling</option>
+                                    <option value="Educational">Educational</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Top 10">Top 10</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="field">
+                            <label for="language">Narration language</label>
+                            <select id="language">
+                                <option value="English">English</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="primary-button" id="generateButton">
+                            Generate Video
+                        </button>
+
+                        <div class="notice">
+                            Each account receives two successful video generations per day.
+                            Failed generations will not consume your allowance.
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- GENERATION STATUS -->
+                <div class="card job-panel" id="jobPanel">
+                    <div class="card-heading">
+                        <div>
+                            <h2>Generation status</h2>
+                            <p id="jobDescription">Your video is being prepared.</p>
+                        </div>
+                        <span class="badge" id="jobBadge">Queued</span>
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <p class="job-status" id="jobStatus">
+                        Waiting for generation service...
+                    </p>
+
+                    <a href="#" class="download-button" id="downloadButton"
+                       style="display:none">
+                        Download video
+                    </a>
+                </div>
+
+            </section>
+
+            <!-- SIDEBAR -->
+            <aside>
+
+                <div class="usage-card">
+                    <div class="label">Daily generation allowance</div>
+
+                    <div class="usage-number">
+                        <span id="remaining">2</span>
+                        <span>/ 2 remaining</span>
+                    </div>
+
+                    <p>Your allowance resets every day.</p>
+
+                    <div class="usage-track">
+                        <div class="usage-fill" id="usageFill"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-heading">
+                        <div>
+                            <h2>Account</h2>
+                            <p>Your account information.</p>
+                        </div>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-label">Account</span>
+                        <span class="status-value" id="accountStatus">Guest</span>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-label">License</span>
+                        <span class="status-value" id="licenseStatus">Not linked</span>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-label">Generator</span>
+                        <span class="status-value">
+                            <span class="status-dot"></span>Ready
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-heading">
+                        <div>
+                            <h2>Recent generations</h2>
+                            <p>Your previous videos.</p>
+                        </div>
+                    </div>
+
+                    <div id="history">
+                        <div class="history-empty">
+                            Your generated videos will appear here.
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        Channel Pilot &copy; 2026. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Temporary frontend state.
+        // Supabase will replace this when we connect the backend.
+        const SUPABASE_URL = "https://tepgxubkncdlcklapptz.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_pXRlaLZG0qpB2gBJ9I0-ig_w9wznqIY";
+
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+        async function signIn() {
+            const { error } = await supabaseClient.auth.signInWithOAuth({
+                provider: "google",
+                options: {
+                    redirectTo: window.location.origin + "/generator.html"
+                }
+            });
+
+            if (error) {
+                alert("Login failed: " + error.message);
+            }
+        }
+
+        async function signOut() {
+            await supabaseClient.auth.signOut();
+            window.location.reload();
+        }
+
+        async function checkSession() {
+            const { data, error } = await supabaseClient.auth.getSession();
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            const user = data.session?.user;
+
+            if (!user) {
+                document.getElementById("signInButton").style.display = "block";
+                document.getElementById("accountBox").style.display = "none";
+                document.getElementById("accountStatus").textContent = "Guest";
+                return;
+            }
+
+            document.getElementById("signInButton").style.display = "none";
+            document.getElementById("accountBox").style.display = "flex";
+            document.getElementById("accountName").textContent =
+                user.email || "Customer";
+
+            document.getElementById("avatar").textContent =
+                (user.email || "C").charAt(0).toUpperCase();
+
+            document.getElementById("accountStatus").textContent = "Signed in";
+        }
+
+        document.getElementById("signInButton").addEventListener("click", signIn);
+        document.getElementById("signOutButton").addEventListener("click", signOut);
+
+        checkSession();
+
+        supabaseClient.auth.onAuthStateChange(() => {
+            checkSession();
+        });
+
+        const state = {
+            remaining: 2,
+            history: [],
+            isGenerating: false
+        };
+
+        const form = document.getElementById("generatorForm");
+        const generateButton = document.getElementById("generateButton");
+        const jobPanel = document.getElementById("jobPanel");
+
+        function updateAllowance() {
+            document.getElementById("remaining").textContent =
+                state.remaining;
+
+            document.getElementById("usageFill").style.width =
+                ((2 - state.remaining) / 2 * 100) + "%";
+
+            generateButton.disabled =
+                state.remaining <= 0 || state.isGenerating;
+
+            generateButton.textContent =
+                state.remaining <= 0
+                    ? "Daily limit reached"
+                    : state.isGenerating
+                        ? "Generation in progress..."
+                        : "Generate Video";
+        }
+
+        function addHistory(topic, status) {
+            const history = document.getElementById("history");
+
+            if (state.history.length === 0) {
+                history.innerHTML = "";
+            }
+
+            state.history.unshift({
+                topic,
+                status,
+                time: new Date().toLocaleTimeString()
+            });
+
+            history.innerHTML = "";
+
+            state.history.forEach(item => {
+                const element = document.createElement("div");
+                element.className = "history-item";
+
+                const title = document.createElement("strong");
+                title.textContent = item.topic;
+
+                const details = document.createElement("span");
+                details.textContent = item.status + " · " + item.time;
+
+                element.append(title, details);
+                history.appendChild(element);
+            });
+        }
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (state.isGenerating || state.remaining <= 0) {
+                return;
+            }
+
+            const topic = document.getElementById("topic").value.trim();
+
+            if (!topic) return;
+
+            /*
+              BACKEND INTEGRATION GOES HERE.
+
+              1. Send the authenticated Supabase user ID.
+              2. Send topic, format, style and language.
+              3. Backend checks license and daily allowance.
+              4. Backend creates a queued Kaggle job.
+              5. Frontend polls job status.
+              6. Backend returns the finished video URL.
+
+              This frontend does not generate a real video yet.
+            */
+
+            state.isGenerating = true;
+            updateAllowance();
+
+            jobPanel.classList.add("active");
+            document.getElementById("jobDescription").textContent = topic;
+            document.getElementById("jobBadge").textContent = "Not connected";
+            document.getElementById("jobStatus").textContent =
+                "The generation backend has not been connected yet.";
+
+            document.getElementById("progressFill").style.width = "0%";
+            document.getElementById("downloadButton").style.display = "none";
+
+            addHistory(topic, "Awaiting backend connection");
+
+            state.isGenerating = false;
+            updateAllowance();
+        });
+
+        updateAllowance();
+    </script>
+
+</body>
+</html>
