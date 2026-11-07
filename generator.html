@@ -45,7 +45,7 @@
         }
 
         .navbar {
-            height: 72px;
+            min-height: 72px;
             background: white;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -78,7 +78,6 @@
         }
 
         .account {
-            display: flex;
             align-items: center;
             gap: 10px;
             padding: 7px 12px;
@@ -391,6 +390,17 @@
             font-size: 11px;
         }
 
+        .auth-message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 18px;
+            background: #fff7ed;
+            color: #9a3412;
+            border: 1px solid #fed7aa;
+            border-radius: 9px;
+            font-size: 12px;
+        }
+
         @media (max-width: 800px) {
             .dashboard {
                 grid-template-columns: 1fr;
@@ -426,6 +436,12 @@
                 grid-template-columns: 1fr;
                 gap: 0;
             }
+
+            .account {
+                gap: 6px;
+                padding: 5px 8px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -438,10 +454,27 @@
         <div class="nav-right">
             <a href="index.html" class="home-link">Back to website</a>
 
-             <div class="account" id="accountBox" style="display:none">
+            <!-- Visible when signed out -->
+            <button
+                id="signInButton"
+                class="primary-button"
+                style="width:auto;padding:10px 16px"
+                type="button"
+            >
+                Continue with Google
+            </button>
+
+            <!-- Visible when signed in -->
+            <div class="account" id="accountBox" style="display:none">
                 <div class="avatar" id="avatar">?</div>
                 <span id="accountName">Customer</span>
-                <button id="signOutButton">Sign out</button>
+                <button
+                    id="signOutButton"
+                    type="button"
+                    style="border:0;background:none;color:#2563eb;font-size:12px;font-weight:600"
+                >
+                    Sign out
+                </button>
             </div>
         </div>
     </nav>
@@ -453,9 +486,10 @@
             <p>Create and manage your automated videos from one place.</p>
         </div>
 
+        <div class="auth-message" id="authMessage"></div>
+
         <div class="dashboard">
 
-            <!-- MAIN GENERATOR -->
             <section>
 
                 <div class="card">
@@ -524,7 +558,6 @@
                     </form>
                 </div>
 
-                <!-- GENERATION STATUS -->
                 <div class="card job-panel" id="jobPanel">
                     <div class="card-heading">
                         <div>
@@ -550,7 +583,6 @@
 
             </section>
 
-            <!-- SIDEBAR -->
             <aside>
 
                 <div class="usage-card">
@@ -620,9 +652,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-        // Temporary frontend state.
-        // Supabase will replace this when we connect the backend.
+        // SUPABASE CONFIGURATION
         const SUPABASE_URL = "https://tepgxubkncdlcklapptz.supabase.co";
         const SUPABASE_KEY = "sb_publishable_pXRlaLZG0qpB2gBJ9I0-ig_w9wznqIY";
 
@@ -631,7 +663,18 @@
             SUPABASE_KEY
         );
 
+        // ELEMENTS
+        const signInButton = document.getElementById("signInButton");
+        const signOutButton = document.getElementById("signOutButton");
+        const accountBox = document.getElementById("accountBox");
+        const accountStatus = document.getElementById("accountStatus");
+        const authMessage = document.getElementById("authMessage");
+
+        // GOOGLE SIGN-IN
         async function signIn() {
+            signInButton.disabled = true;
+            signInButton.textContent = "Redirecting...";
+
             const { error } = await supabaseClient.auth.signInWithOAuth({
                 provider: "google",
                 options: {
@@ -640,51 +683,72 @@
             });
 
             if (error) {
-                alert("Login failed: " + error.message);
+                console.error("Login error:", error);
+                authMessage.textContent = "Login failed: " + error.message;
+                authMessage.style.display = "block";
+
+                signInButton.disabled = false;
+                signInButton.textContent = "Continue with Google";
             }
         }
 
+        // GOOGLE SIGN-OUT
         async function signOut() {
-            await supabaseClient.auth.signOut();
+            const { error } = await supabaseClient.auth.signOut();
+
+            if (error) {
+                console.error("Sign-out error:", error);
+                alert("Could not sign out: " + error.message);
+                return;
+            }
+
             window.location.reload();
         }
 
+        // CHECK AUTHENTICATION
         async function checkSession() {
             const { data, error } = await supabaseClient.auth.getSession();
 
             if (error) {
-                console.error(error);
+                console.error("Session error:", error);
                 return;
             }
 
             const user = data.session?.user;
 
             if (!user) {
-                document.getElementById("signInButton").style.display = "block";
-                document.getElementById("accountBox").style.display = "none";
-                document.getElementById("accountStatus").textContent = "Guest";
+                signInButton.style.display = "block";
+                accountBox.style.display = "none";
+                accountStatus.textContent = "Guest";
                 return;
             }
 
-            document.getElementById("signInButton").style.display = "none";
-            document.getElementById("accountBox").style.display = "flex";
-            document.getElementById("accountName").textContent =
-                user.email || "Customer";
+            signInButton.style.display = "none";
+            accountBox.style.display = "flex";
 
+            const email = user.email || "Customer";
+
+            document.getElementById("accountName").textContent = email;
             document.getElementById("avatar").textContent =
-                (user.email || "C").charAt(0).toUpperCase();
+                email.charAt(0).toUpperCase();
 
-            document.getElementById("accountStatus").textContent = "Signed in";
+            accountStatus.textContent = "Signed in";
         }
 
-        document.getElementById("signInButton").addEventListener("click", signIn);
-        document.getElementById("signOutButton").addEventListener("click", signOut);
+        // AUTH EVENT LISTENERS
+        signInButton.addEventListener("click", signIn);
+        signOutButton.addEventListener("click", signOut);
 
+        // RESTORE EXISTING SESSION
         checkSession();
 
-        supabaseClient.auth.onAuthStateChange(() => {
+        // LISTEN FOR LOGIN / LOGOUT CHANGES
+        supabaseClient.auth.onAuthStateChange((event, session) => {
             checkSession();
         });
+
+        // TEMPORARY FRONTEND STATE
+        // Database-backed limits will replace this later.
 
         const state = {
             remaining: 2,
@@ -717,10 +781,6 @@
         function addHistory(topic, status) {
             const history = document.getElementById("history");
 
-            if (state.history.length === 0) {
-                history.innerHTML = "";
-            }
-
             state.history.unshift({
                 topic,
                 status,
@@ -744,6 +804,7 @@
             });
         }
 
+        // GENERATION PLACEHOLDER
         form.addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -755,23 +816,13 @@
 
             if (!topic) return;
 
-            /*
-              BACKEND INTEGRATION GOES HERE.
-
-              1. Send the authenticated Supabase user ID.
-              2. Send topic, format, style and language.
-              3. Backend checks license and daily allowance.
-              4. Backend creates a queued Kaggle job.
-              5. Frontend polls job status.
-              6. Backend returns the finished video URL.
-
-              This frontend does not generate a real video yet.
-            */
+            // Real generation will be connected to the backend later.
 
             state.isGenerating = true;
             updateAllowance();
 
             jobPanel.classList.add("active");
+
             document.getElementById("jobDescription").textContent = topic;
             document.getElementById("jobBadge").textContent = "Not connected";
             document.getElementById("jobStatus").textContent =
