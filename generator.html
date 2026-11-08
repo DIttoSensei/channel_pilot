@@ -39,7 +39,7 @@ input:focus,select:focus{border-color:var(--primary)}
 .message.info{display:block;background:#eff6ff;color:#1d4ed8}
 .status-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border);font-size:12px}
 .status-row:last-child{border:none}.status-label{color:var(--muted)}.status-value{font-weight:600}
-.license-active{display:none;margin-top:12px}.license-active p{color:var(--muted);font-size:12px;line-height:1.6}
+.license-active{display:none;margin-top:12px}.license-active p,.cf-text{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:14px}
 .history-empty{text-align:center;padding:25px 10px;color:var(--muted);font-size:12px}
 .job-panel{display:none}.job-panel.active{display:block}
 .job-panel p{margin:10px 0 14px;font-size:13px;color:var(--muted);line-height:1.6}
@@ -87,7 +87,7 @@ input:focus,select:focus{border-color:var(--primary)}
             <small id="categoryDesc"></small>
           </div>
           <button type="submit" class="primary-button" id="generateButton">Generate Video</button>
-          <div class="notice">You need an active license to generate videos. Each account can generate 2 videos per day. Finished videos are kept for 24 hours, so download yours before then.</div>
+          <div class="notice">You need an active license and a connected Cloudflare account to generate videos. Each account can generate 2 videos per day. Finished videos are kept for 24 hours, so download yours before then.</div>
           <div id="generationMessage" class="message"></div>
         </form>
       </div>
@@ -120,6 +120,16 @@ input:focus,select:focus{border-color:var(--primary)}
       </div>
 
       <div class="card">
+        <div class="card-heading">
+          <div><h2>Cloudflare</h2><p>Used to create your video images.</p></div>
+          <span class="badge warning" id="cfBadge">Not connected</span>
+        </div>
+        <p class="cf-text">Images are generated with your own free Cloudflare account. Click Connect, log in to Cloudflare and press Authorize. It takes about 30 seconds and you only do it once.</p>
+        <button class="primary-button" type="button" id="cfButton">Connect Cloudflare</button>
+        <div id="cfMessage" class="message"></div>
+      </div>
+
+      <div class="card">
         <div class="card-heading"><div><h2>Account</h2><p>Your account information.</p></div></div>
         <div class="status-row"><span class="status-label">Account</span><span class="status-value" id="accountStatus">Guest</span></div>
         <div class="status-row"><span class="status-label">License</span><span class="status-value" id="licenseStatus">Not linked</span></div>
@@ -142,16 +152,22 @@ const SUPABASE_URL = "https://tepgxubkncdlcklapptz.supabase.co";
 const SUPABASE_KEY = "sb_publishable_pXRlaLZG0qpB2gBJ9I0-ig_w9wznqIY";
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+const CF_CLIENT_ID = "9e71ced2363c3e43c861663efd3fa315";
+const CF_REDIRECT = "https://channelpilot.indevs.in/api/cloudflare-callback";
+const CF_SCOPES = "ai.read ai.write account-settings.read offline_access";
 const DAILY_LIMIT = 2;
+
 const $ = (id) => document.getElementById(id);
 const signInButton = $("signInButton"), signOutButton = $("signOutButton"), accountBox = $("accountBox");
 const licenseForm = $("licenseForm"), licenseActive = $("licenseActive"), licenseKeyInput = $("licenseKey");
 const redeemButton = $("redeemButton"), licenseMessage = $("licenseMessage"), generationMessage = $("generationMessage");
 const generateButton = $("generateButton"), categorySelect = $("category");
+const cfButton = $("cfButton"), cfMessage = $("cfMessage");
 
 let currentUser = null, hasActiveLicense = false;
 let pollTimer = null, latestJobs = [], usedToday = 0, hasActiveJob = false;
 let categoryInfo = {};
+let cfConnected = false, cfNeedsReconnect = false;
 
 function showMessage(el, msg, type) { el.textContent = msg; el.className = "message " + type; }
 function clearMessage(el) { el.textContent = ""; el.className = "message"; }
@@ -239,13 +255,50 @@ async function redeemLicense() {
   }
 }
 
+// ---------- CLOUDFLARE ----------
+function renderCloudflare() {
+  const badge = $("cfBadge");
+  if (cfConnected) {
+    badge.textContent = "Connected"; badge.className = "badge success"; cfButton.textContent = "Reconnect Cloudflare";
+  } else if (cfNeedsReconnect) {
+    badge.textContent = "Reconnect needed"; badge.className = "badge warning"; cfButton.textContent = "Reconnect Cloudflare";
+  } else {
+    badge.textContent = "Not connected"; badge.className = "badge warning"; cfButton.textContent = "Connect Cloudflare";
+  }
+  updateGenerateButton();
+}
+async function refreshCloudflareStatus() {
+  cfConnected = false; cfNeedsReconnect = false;
+  if (currentUser) {
+    const { data, error } = await supabaseClient.rpc("get_my_cloudflare_status");
+    if (error) console.error("Cloudflare status error:", error);
+    else if (data) { cfConnected = data.connected === true; cfNeedsReconnect = data.needs_reconnect === true; }
+  }
+  renderCloudflare();
+}
+async function connectCloudflare() {
+  clearMessage(cfMessage);
+  if (!currentUser) return showMessage(cfMessage, "Sign in with Google first.", "error");
+  cfButton.disabled = true; cfButton.textContent = "Redirecting...";
+  const { data, error } = await supabaseClient.rpc("create_cf_state");
+  if (error || !data) {
+    console.error("State error:", error);
+    cfButton.disabled = false; renderCloudflare();
+    return showMessage(cfMessage, "Could not start the connection. Please try again.", "error");
+  }
+  const params = new URLSearchParams({
+    client_id: CF_CLIENT_ID, response_type: "code", redirect_uri: CF_REDIRECT, scope: CF_SCOPES, state: data
+  });
+  window.location.href = "https://dash.cloudflare.com/oauth2/auth?" + params.toString();
+}
+
 // ---------- JOBS ----------
 function todayUTC() { return new Date().toISOString().slice(0, 10); }
 
 function updateGenerateButton() {
   const left = Math.max(0, DAILY_LIMIT - usedToday);
   $("usageLeft").textContent = currentUser ? left + " of " + DAILY_LIMIT : "-";
-  generateButton.disabled = !categorySelect.value || (!!currentUser && (hasActiveJob || left === 0));
+  generateButton.disabled = !categorySelect.value || (!!currentUser && (!cfConnected || hasActiveJob || left === 0));
   generateButton.textContent = hasActiveJob ? "Video in progress..." : "Generate Video";
 }
 
@@ -273,7 +326,7 @@ async function renderJobPanel(job) {
   } else if (job.status === "completed") {
     text.textContent = "This video has expired and was removed.";
   } else {
-    text.textContent = "Generation failed. This did not count toward your daily limit, so you can try again.";
+    text.textContent = "Generation failed. This did not count toward your daily limit, so you can try again. If it keeps failing, reconnect your Cloudflare account.";
   }
 }
 
@@ -317,7 +370,7 @@ async function loadJobs() {
   updateGenerateButton();
 
   if (active && !pollTimer) pollTimer = setInterval(loadJobs, 5000);
-  if (!active && pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+  if (!active && pollTimer) { clearInterval(pollTimer); pollTimer = null; refreshCloudflareStatus(); }
 }
 
 $("generatorForm").addEventListener("submit", async (event) => {
@@ -330,6 +383,7 @@ $("generatorForm").addEventListener("submit", async (event) => {
     showMessage(generationMessage, "You need an active license before generating videos. Redeem your license in the sidebar.", "error");
     licenseKeyInput.focus(); return;
   }
+  if (!cfConnected) return showMessage(generationMessage, "Connect your Cloudflare account first (see the sidebar).", "error");
 
   generateButton.disabled = true; generateButton.textContent = "Submitting...";
   try {
@@ -351,7 +405,8 @@ async function checkSession() {
   if (!currentUser) {
     signInButton.style.display = "block"; accountBox.style.display = "none";
     $("accountStatus").textContent = "Guest";
-    hasActiveLicense = false; displayLicenseStatus(false); await loadJobs();
+    hasActiveLicense = false; displayLicenseStatus(false);
+    await refreshCloudflareStatus(); await loadJobs();
     return;
   }
   signInButton.style.display = "none"; accountBox.style.display = "flex";
@@ -360,13 +415,21 @@ async function checkSession() {
   $("avatar").textContent = email.charAt(0).toUpperCase();
   $("accountStatus").textContent = "Signed in";
   await refreshLicenseStatus();
+  await refreshCloudflareStatus();
   await loadJobs();
 }
 
 signInButton.addEventListener("click", signIn);
 signOutButton.addEventListener("click", signOut);
 redeemButton.addEventListener("click", redeemLicense);
+cfButton.addEventListener("click", connectCloudflare);
 supabaseClient.auth.onAuthStateChange(() => { setTimeout(checkSession, 0); });
+
+const cfResult = new URLSearchParams(window.location.search).get("cf");
+if (cfResult) history.replaceState(null, "", window.location.pathname);
+if (cfResult === "connected") showMessage(cfMessage, "Cloudflare connected. You can generate videos now.", "success");
+if (cfResult === "error") showMessage(cfMessage, "Could not connect Cloudflare. Please try again.", "error");
+
 loadCategories();
 checkSession();
 </script>
