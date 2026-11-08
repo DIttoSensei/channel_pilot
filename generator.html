@@ -15,8 +15,8 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .logo{font-size:21px;font-weight:800;letter-spacing:-1px}.logo span{color:var(--primary)}
 .nav-right{display:flex;align-items:center;gap:18px}
 .home-link{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}
-.account{align-items:center;gap:10px;padding:7px 12px;border:1px solid var(--border);border-radius:30px;font-size:12px;font-weight:600}
-.avatar{width:29px;height:29px;border-radius:50%;background:#dbeafe;color:var(--primary);display:grid;place-items:center}
+.account{align-items:center;gap:10px;padding:7px 12px;border:1px solid var(--border);border-radius:30px;font-size:12px;font-weight:600;min-width:0;max-width:min(420px,52vw)}
+.avatar{width:29px;height:29px;min-width:29px;border-radius:50%;background:#dbeafe;color:var(--primary);display:grid;place-items:center}\n#accountName{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .container{max-width:1160px;margin:42px auto;padding:0 24px}
 .page-heading{margin-bottom:30px}.page-heading h1{font-size:28px;letter-spacing:-1px;margin-bottom:8px}.page-heading p{color:var(--muted);font-size:14px}
 .dashboard{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr);gap:22px;align-items:start}
@@ -75,7 +75,7 @@ input:focus{border-color:var(--primary)}
 .history-item button{background:#eff6ff;color:var(--primary);border:0;border-radius:8px;padding:7px 11px;font-size:11px;font-weight:700}
 .footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:11px}
 @media(max-width:800px){.dashboard{grid-template-columns:1fr}.container{margin-top:28px}}
-@media(max-width:560px){.navbar{padding:0 16px}.home-link{display:none}.container{padding:0 14px}.card{padding:19px}.page-heading h1{font-size:24px}.account{gap:6px;padding:5px 8px}.how{grid-template-columns:1fr}.cat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.navbar{min-height:62px;padding:0 12px;gap:8px}.logo{font-size:18px}.nav-right{gap:8px;min-width:0}.home-link{display:none}.container{padding:0 14px;margin-top:22px}.card{padding:17px}.page-heading h1{font-size:24px}.page-heading p{line-height:1.5}.account{gap:6px;padding:5px 7px;max-width:62vw;font-size:11px}.account #signOutButton{font-size:11px!important;white-space:nowrap}.how{grid-template-columns:1fr}.cat-grid{grid-template-columns:1fr 1fr}.cat{padding:11px}.stepper{gap:3px}.step{gap:5px;font-size:10px}.step i{width:21px;height:21px}.bar{margin:0 5px;min-width:8px}.history-item{align-items:flex-start}.history-item button{flex-shrink:0}}\n@media(max-width:360px){.logo{font-size:16px}.account{max-width:58vw}.account #signOutButton{font-size:10px!important}.cat-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -177,7 +177,7 @@ input:focus{border-color:var(--primary)}
         <div class="card-heading"><div><h2>Account</h2><p>Your account information.</p></div></div>
         <div class="status-row"><span class="status-label">Account</span><span class="status-value" id="accountStatus">Guest</span></div>
         <div class="status-row"><span class="status-label">License</span><span class="status-value" id="licenseStatus">Not linked</span></div>
-        <div class="status-row"><span class="status-label">Today</span><span class="status-value" id="usageLeft">-</span></div>
+        <div class="status-row"><span class="status-label">Generations left today</span><span class="status-value" id="usageLeft">-</span></div>
       </div>
 
       <div class="card">
@@ -363,7 +363,7 @@ function timeAgo(iso) {
 function updateGenerateButton() {
   const left = Math.max(0, DAILY_LIMIT - usedToday);
   const limitReached = !!currentUser && !hasActiveJob && left === 0;
-  $("usageLeft").textContent = !currentUser ? "-" : (limitReached ? "Limit reached" : "Available");
+  $("usageLeft").textContent = !currentUser ? "-" : (left + " of " + DAILY_LIMIT);
   $("limitNote").style.display = limitReached ? "block" : "none";
   generateButton.disabled = !selectedCategory || (!!currentUser && (!cfConnected || hasActiveJob || left === 0));
   generateButton.textContent = hasActiveJob ? "Video in progress..." : (selectedCategory ? "Generate " + selectedCategory + " video" : "Generate video");
