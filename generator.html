@@ -21,18 +21,19 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}
 .page-heading{margin-bottom:30px}.page-heading h1{font-size:28px;letter-spacing:-1px;margin-bottom:8px}.page-heading p{color:var(--muted);font-size:14px}
 .dashboard{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr);gap:22px;align-items:start}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:25px;margin-bottom:20px}
-.card-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}
+.card-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:23px}
 .card-heading h2,.card>h2{font-size:17px;letter-spacing:-.4px}
 .card-heading p{color:var(--muted);font-size:12px;margin-top:5px}
 .badge{background:#eff6ff;color:var(--primary);padding:6px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
 .badge.success{background:#eaf8f0;color:#12834f}.badge.warning{background:#fff7ed;color:#c2410c}
 .field{margin-bottom:20px}.field label{display:block;font-size:13px;font-weight:600;margin-bottom:9px}
 .field small{display:block;color:var(--muted);font-size:11px;margin-top:7px}
-input,select{width:100%;border:1px solid var(--border);border-radius:9px;padding:13px 14px;background:#fff;outline:none;color:var(--text);font-size:13px}
-input:focus,select:focus{border-color:var(--primary)}
+input{width:100%;border:1px solid var(--border);border-radius:9px;padding:13px 14px;background:#fff;outline:none;color:var(--text);font-size:13px}
+input:focus{border-color:var(--primary)}
 .primary-button{width:100%;background:var(--primary);color:#fff;border:none;border-radius:9px;padding:14px;font-size:13px;font-weight:700}
 .primary-button:hover{background:var(--primary-dark)}.primary-button:disabled{opacity:.55;cursor:not-allowed}
 .notice{background:#f0f6ff;color:#315b9b;border:1px solid #dbeafe;border-radius:9px;padding:12px;margin-top:14px;font-size:11px;line-height:1.6}
+.hint{color:var(--muted);font-size:12px;margin-top:12px;line-height:1.6}
 .message{display:none;padding:12px;margin-top:13px;border-radius:9px;font-size:12px;line-height:1.5}
 .message.success{display:block;background:#eaf8f0;color:#12834f}
 .message.error{display:block;background:#fef2f2;color:#b91c1c}
@@ -41,15 +42,40 @@ input:focus,select:focus{border-color:var(--primary)}
 .status-row:last-child{border:none}.status-label{color:var(--muted)}.status-value{font-weight:600}
 .license-active{display:none;margin-top:12px}.license-active p,.cf-text{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:14px}
 .history-empty{text-align:center;padding:25px 10px;color:var(--muted);font-size:12px}
+
+/* how it works */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.how div{background:#f8fafd;border:1px solid var(--border);border-radius:12px;padding:16px}
+.how b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-size:12px;margin-bottom:10px}
+.how h3{font-size:13px;margin-bottom:5px}.how p{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* category picker */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cat{text-align:left;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:14px;transition:border-color .15s,background .15s,transform .15s}
+.cat:hover{border-color:#bfdbfe;transform:translateY(-1px)}
+.cat.selected{border-color:var(--primary);background:#eff6ff}
+.cat strong{display:block;font-size:13px;margin-bottom:4px}
+.cat span{display:block;font-size:11px;color:var(--muted);line-height:1.5}
+.cat.selected strong{color:var(--primary)}
+
+/* status */
 .job-panel{display:none}.job-panel.active{display:block}
-.job-panel p{margin:10px 0 14px;font-size:13px;color:var(--muted);line-height:1.6}
-.dl-button{background:var(--primary);color:#fff;border:0;border-radius:9px;padding:11px 16px;font-size:12px;font-weight:700}
+.stepper{display:flex;align-items:center;margin:18px 0 6px}
+.step{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#a0abc0}
+.step i{width:24px;height:24px;border-radius:50%;border:2px solid #d5deec;display:grid;place-items:center;font-style:normal;font-size:11px}
+.step.active{color:var(--primary)}.step.active i{border-color:var(--primary);background:#eff6ff}
+.step.done{color:#12834f}.step.done i{border-color:#12834f;background:#12834f;color:#fff}
+.bar{flex:1;height:2px;background:#e1e8f4;margin:0 12px;min-width:16px}
+.job-panel .status-text{margin:16px 0 4px;font-size:14px;font-weight:600;line-height:1.6}
+.job-panel .sub-text{font-size:12px;color:var(--muted);line-height:1.7}
+.reassure{margin-top:14px;background:#f0f6ff;border:1px solid #dbeafe;border-radius:10px;padding:12px 14px;font-size:12px;color:#315b9b;line-height:1.7}
+.dl-button{margin-top:16px;background:var(--primary);color:#fff;border:0;border-radius:9px;padding:12px 18px;font-size:13px;font-weight:700}
 .history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);font-size:12px}
 .history-item:last-child{border:none}.history-item small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
 .history-item button{background:#eff6ff;color:var(--primary);border:0;border-radius:8px;padding:7px 11px;font-size:11px;font-weight:700}
 .footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:11px}
 @media(max-width:800px){.dashboard{grid-template-columns:1fr}.container{margin-top:28px}}
-@media(max-width:500px){.navbar{padding:0 16px}.home-link{display:none}.container{padding:0 14px}.card{padding:19px}.page-heading h1{font-size:24px}.account{gap:6px;padding:5px 8px}}
+@media(max-width:560px){.navbar{padding:0 16px}.home-link{display:none}.container{padding:0 14px}.card{padding:19px}.page-heading h1{font-size:24px}.account{gap:6px;padding:5px 8px}.how{grid-template-columns:1fr}.cat-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -70,31 +96,49 @@ input:focus,select:focus{border-color:var(--primary)}
 <main class="container">
   <div class="page-heading">
     <h1>Video Generator</h1>
-    <p>Create and manage your automated videos from one place.</p>
+    <p>Pick a category, click generate, and your finished video will be waiting for you.</p>
   </div>
 
   <div class="dashboard">
     <section>
       <div class="card">
+        <div class="card-heading"><div><h2>How it works</h2><p>Three simple steps from here to a finished video.</p></div></div>
+        <div class="how">
+          <div><b>1</b><h3>Pick a category</h3><p>Click the kind of video you want. Each one has its own story style, voices and look.</p></div>
+          <div><b>2</b><h3>Click generate</h3><p>We write, voice and render it for you. Most videos take about 5 to 15 minutes.</p></div>
+          <div><b>3</b><h3>Download</h3><p>Come back anytime. Your video is kept here for 24 hours, so download it before then.</p></div>
+        </div>
+      </div>
+
+      <div class="card">
         <div class="card-heading">
-          <div><h2>Create a new video</h2><p>Pick a category and we'll write, voice and render the video.</p></div>
+          <div><h2>Create a new video</h2><p>Click a category below to choose it.</p></div>
           <span class="badge">AI Generator</span>
         </div>
         <form id="generatorForm">
           <div class="field">
-            <label for="category">Video category</label>
-            <select id="category"><option value="">Loading categories...</option></select>
-            <small id="categoryDesc"></small>
+            <label id="catLabel">Video category</label>
+            <div class="cat-grid" id="categoryGrid" role="radiogroup" aria-labelledby="catLabel">
+              <div class="hint">Loading categories...</div>
+            </div>
           </div>
-          <button type="submit" class="primary-button" id="generateButton">Generate Video</button>
-          <div class="notice">You need an active license and a connected Cloudflare account to generate videos. Each account can generate 2 videos per day. Finished videos are kept for 24 hours, so download yours before then.</div>
+          <button type="submit" class="primary-button" id="generateButton">Generate video</button>
+          <p class="hint" id="limitNote" style="display:none">You've reached today's limit. It resets tomorrow, so come back then for more.</p>
+          <div class="notice">To generate videos you need an active license and a connected Cloudflare account (see the sidebar). You can close this page after you click generate. We'll keep working, and your video will be here when you return.</div>
           <div id="generationMessage" class="message"></div>
         </form>
       </div>
 
       <div class="card job-panel" id="jobPanel">
-        <h2>Generation status</h2>
-        <p id="jobStatus">Waiting for generation service.</p>
+        <h2>Your video</h2>
+        <div class="stepper" id="stepper">
+          <div class="step" id="st1"><i>1</i>Queued</div><div class="bar"></div>
+          <div class="step" id="st2"><i>2</i>Creating</div><div class="bar"></div>
+          <div class="step" id="st3"><i>3</i>Ready</div>
+        </div>
+        <p class="status-text" id="jobStatus">Waiting for generation service.</p>
+        <p class="sub-text" id="jobSub"></p>
+        <div class="reassure" id="reassure" style="display:none">You don't need to wait here. Close this page, do something else and come back later. Your video will appear on this page when it's ready, and it's kept for 24 hours.</div>
         <button type="button" class="dl-button" id="jobDownload" style="display:none">Download video</button>
       </div>
     </section>
@@ -109,7 +153,7 @@ input:focus,select:focus{border-color:var(--primary)}
           <div class="field">
             <label for="licenseKey">License key</label>
             <input type="text" id="licenseKey" placeholder="CP-XXXX-XXXX-XXXX-XXXX" autocomplete="off">
-            <small>Enter the license key you received after purchasing.</small>
+            <small>Enter the license key you received after subscribing.</small>
           </div>
           <button class="primary-button" type="button" id="redeemButton">Redeem license</button>
           <div id="licenseMessage" class="message"></div>
@@ -124,7 +168,7 @@ input:focus,select:focus{border-color:var(--primary)}
           <div><h2>Cloudflare</h2><p>Used to create your video images.</p></div>
           <span class="badge warning" id="cfBadge">Not connected</span>
         </div>
-        <p class="cf-text">Images are generated with your own free Cloudflare account. Click Connect, log in to Cloudflare and press Authorize. It takes about 30 seconds and you only do it once.</p>
+        <p class="cf-text">Images are created with your own free Cloudflare account. Click Connect, log in to Cloudflare and press Authorize. It takes about 30 seconds and you only do it once.</p>
         <button class="primary-button" type="button" id="cfButton">Connect Cloudflare</button>
         <div id="cfMessage" class="message"></div>
       </div>
@@ -133,11 +177,11 @@ input:focus,select:focus{border-color:var(--primary)}
         <div class="card-heading"><div><h2>Account</h2><p>Your account information.</p></div></div>
         <div class="status-row"><span class="status-label">Account</span><span class="status-value" id="accountStatus">Guest</span></div>
         <div class="status-row"><span class="status-label">License</span><span class="status-value" id="licenseStatus">Not linked</span></div>
-        <div class="status-row"><span class="status-label">Videos left today</span><span class="status-value" id="usageLeft">-</span></div>
+        <div class="status-row"><span class="status-label">Today</span><span class="status-value" id="usageLeft">-</span></div>
       </div>
 
       <div class="card">
-        <div class="card-heading"><div><h2>Recent generations</h2><p>Your previous videos.</p></div></div>
+        <div class="card-heading"><div><h2>Recent videos</h2><p>Kept for 24 hours.</p></div></div>
         <div id="historyList"><div class="history-empty">Your generated videos will appear here.</div></div>
       </div>
     </aside>
@@ -156,17 +200,18 @@ const CF_CLIENT_ID = "9e71ced2363c3e43c861663efd3fa315";
 const CF_REDIRECT = "https://channelpilot.indevs.in/api/cloudflare-callback";
 const CF_SCOPES = "ai.read ai.write account-settings.read offline_access";
 const DAILY_LIMIT = 2;
+const BASE_TITLE = "Channel Pilot | Video Generator";
 
 const $ = (id) => document.getElementById(id);
 const signInButton = $("signInButton"), signOutButton = $("signOutButton"), accountBox = $("accountBox");
 const licenseForm = $("licenseForm"), licenseActive = $("licenseActive"), licenseKeyInput = $("licenseKey");
 const redeemButton = $("redeemButton"), licenseMessage = $("licenseMessage"), generationMessage = $("generationMessage");
-const generateButton = $("generateButton"), categorySelect = $("category");
+const generateButton = $("generateButton"), categoryGrid = $("categoryGrid");
 const cfButton = $("cfButton"), cfMessage = $("cfMessage");
 
 let currentUser = null, hasActiveLicense = false;
 let pollTimer = null, latestJobs = [], usedToday = 0, hasActiveJob = false;
-let categoryInfo = {};
+let selectedCategory = "";
 let cfConnected = false, cfNeedsReconnect = false;
 
 function showMessage(el, msg, type) { el.textContent = msg; el.className = "message " + type; }
@@ -176,21 +221,32 @@ function clearMessage(el) { el.textContent = ""; el.className = "message"; }
 async function loadCategories() {
   const { data, error } = await supabaseClient.from("categories")
     .select("name,description").eq("active", true).order("sort");
-  categorySelect.replaceChildren();
+  categoryGrid.replaceChildren();
   if (error || !data || !data.length) {
     console.error("Categories error:", error);
-    const o = document.createElement("option"); o.value = ""; o.textContent = "Categories unavailable";
-    categorySelect.appendChild(o); updateGenerateButton(); return;
+    const d = document.createElement("div"); d.className = "hint"; d.textContent = "Categories are unavailable right now. Please refresh the page.";
+    categoryGrid.appendChild(d); updateGenerateButton(); return;
   }
   data.forEach((c) => {
-    categoryInfo[c.name] = c.description;
-    const o = document.createElement("option"); o.value = c.name; o.textContent = c.name;
-    categorySelect.appendChild(o);
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "cat"; b.setAttribute("role", "radio"); b.setAttribute("aria-checked", "false");
+    b.dataset.name = c.name;
+    const t = document.createElement("strong"); t.textContent = c.name;
+    const s = document.createElement("span"); s.textContent = c.description || "";
+    b.appendChild(t); b.appendChild(s);
+    b.addEventListener("click", () => selectCategory(c.name));
+    categoryGrid.appendChild(b);
   });
-  showCategoryDesc(); updateGenerateButton();
+  selectCategory(data[0].name);
 }
-function showCategoryDesc() { $("categoryDesc").textContent = categoryInfo[categorySelect.value] || ""; }
-categorySelect.addEventListener("change", showCategoryDesc);
+function selectCategory(name) {
+  selectedCategory = name;
+  categoryGrid.querySelectorAll(".cat").forEach((el) => {
+    const on = el.dataset.name === name;
+    el.classList.toggle("selected", on); el.setAttribute("aria-checked", String(on));
+  });
+  updateGenerateButton();
+}
 
 // ---------- AUTH ----------
 async function signIn() {
@@ -295,11 +351,22 @@ async function connectCloudflare() {
 // ---------- JOBS ----------
 function todayUTC() { return new Date().toISOString().slice(0, 10); }
 
+function timeAgo(iso) {
+  const m = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (m < 1) return "just now";
+  if (m === 1) return "1 minute ago";
+  if (m < 60) return m + " minutes ago";
+  const h = Math.floor(m / 60);
+  return h + (h === 1 ? " hour ago" : " hours ago");
+}
+
 function updateGenerateButton() {
   const left = Math.max(0, DAILY_LIMIT - usedToday);
-  $("usageLeft").textContent = currentUser ? left + " of " + DAILY_LIMIT : "-";
-  generateButton.disabled = !categorySelect.value || (!!currentUser && (!cfConnected || hasActiveJob || left === 0));
-  generateButton.textContent = hasActiveJob ? "Video in progress..." : "Generate Video";
+  const limitReached = !!currentUser && !hasActiveJob && left === 0;
+  $("usageLeft").textContent = !currentUser ? "-" : (limitReached ? "Limit reached" : "Available");
+  $("limitNote").style.display = limitReached ? "block" : "none";
+  generateButton.disabled = !selectedCategory || (!!currentUser && (!cfConnected || hasActiveJob || left === 0));
+  generateButton.textContent = hasActiveJob ? "Video in progress..." : (selectedCategory ? "Generate " + selectedCategory + " video" : "Generate video");
 }
 
 async function downloadVideo(path, btn) {
@@ -311,22 +378,43 @@ async function downloadVideo(path, btn) {
   document.body.appendChild(a); a.click(); a.remove();
 }
 
+function setStage(stage) { // 0 = hide, 1 queued, 2 creating, 4 all done
+  $("stepper").style.display = stage === 0 ? "none" : "flex";
+  ["st1", "st2", "st3"].forEach((id, i) => {
+    const n = i + 1;
+    $(id).className = "step" + (stage > n ? " done" : "") + (stage === n ? " active" : "");
+  });
+}
+
 async function renderJobPanel(job) {
-  const panel = $("jobPanel"), text = $("jobStatus"), dl = $("jobDownload");
+  const panel = $("jobPanel"), text = $("jobStatus"), sub = $("jobSub"), dl = $("jobDownload"), re = $("reassure");
   if (!job) { panel.classList.remove("active"); return; }
-  panel.classList.add("active"); dl.style.display = "none";
+  panel.classList.add("active"); dl.style.display = "none"; re.style.display = "none"; sub.textContent = "";
+
   if (job.status === "queued") {
+    setStage(1);
     const { data } = await supabaseClient.rpc("get_queue_position", { p_job_id: job.id });
-    text.textContent = "Your video is queued" + (data ? " (position " + data + ")" : "") + ". The generator is starting up, which can take a few minutes. You can leave this page and come back.";
+    text.textContent = "Your " + job.category + " video is in the queue" + (data ? " (position " + data + ")" : "") + ".";
+    sub.textContent = "Requested " + timeAgo(job.created_at) + ". The generator is starting up, and most videos are ready in about 5 to 15 minutes.";
+    re.style.display = "block";
   } else if (job.status === "running") {
-    text.textContent = "Your video is being generated. This can take several minutes.";
+    setStage(2);
+    text.textContent = "Your " + job.category + " video is being created.";
+    sub.textContent = "Requested " + timeAgo(job.created_at) + ". We're writing the script, recording the narration and rendering the video. Most videos take about 5 to 15 minutes.";
+    re.style.display = "block";
   } else if (job.status === "completed" && job.video_path) {
+    setStage(4);
     text.textContent = "Your " + job.category + " video is ready.";
+    sub.textContent = "Download it within 24 hours of creation. After that it's removed automatically.";
     dl.style.display = "inline-block"; dl.onclick = () => downloadVideo(job.video_path, dl);
   } else if (job.status === "completed") {
+    setStage(0);
     text.textContent = "This video has expired and was removed.";
+    sub.textContent = "Videos are kept for 24 hours. Generate a new one whenever you like.";
   } else {
-    text.textContent = "Generation failed. This did not count toward your daily limit, so you can try again. If it keeps failing, reconnect your Cloudflare account.";
+    setStage(0);
+    text.textContent = "This video couldn't be created.";
+    sub.textContent = "It didn't count toward your daily limit, so you can try again. If it keeps happening, try reconnecting your Cloudflare account.";
   }
 }
 
@@ -341,7 +429,7 @@ function renderHistory(jobs) {
     const info = document.createElement("div");
     info.textContent = j.category;
     const sub = document.createElement("small");
-    const state = j.status === "completed" && !j.video_path ? "expired" : j.status;
+    const state = j.status === "completed" && !j.video_path ? "expired" : (j.status === "failed" ? "not created" : j.status);
     sub.textContent = new Date(j.created_at).toLocaleString() + " · " + state;
     info.appendChild(sub); row.appendChild(info);
     if (j.status === "completed" && j.video_path) {
@@ -353,7 +441,10 @@ function renderHistory(jobs) {
 }
 
 async function loadJobs() {
-  if (!currentUser) { latestJobs = []; usedToday = 0; hasActiveJob = false; renderHistory([]); renderJobPanel(null); updateGenerateButton(); return; }
+  if (!currentUser) {
+    latestJobs = []; usedToday = 0; hasActiveJob = false;
+    renderHistory([]); renderJobPanel(null); updateGenerateButton(); document.title = BASE_TITLE; return;
+  }
   const { data, error } = await supabaseClient.from("generation_jobs")
     .select("id,status,category,video_path,usage_day,created_at")
     .order("created_at", { ascending: false }).limit(20);
@@ -368,6 +459,11 @@ async function loadJobs() {
   renderHistory(latestJobs);
   await renderJobPanel(active || latestJobs[0] || null);
   updateGenerateButton();
+
+  const newest = latestJobs[0];
+  if (active) document.title = "Creating your video... | Channel Pilot";
+  else if (newest && newest.status === "completed" && newest.video_path) document.title = "✓ Video ready | Channel Pilot";
+  else document.title = BASE_TITLE;
 
   if (active && !pollTimer) pollTimer = setInterval(loadJobs, 5000);
   if (!active && pollTimer) { clearInterval(pollTimer); pollTimer = null; refreshCloudflareStatus(); }
@@ -387,12 +483,13 @@ $("generatorForm").addEventListener("submit", async (event) => {
 
   generateButton.disabled = true; generateButton.textContent = "Submitting...";
   try {
-    const { data, error } = await supabaseClient.rpc("enqueue_generation", { p_category: categorySelect.value });
+    const { data, error } = await supabaseClient.rpc("enqueue_generation", { p_category: selectedCategory });
     if (error) { console.error(error); showMessage(generationMessage, "Could not start generation. Please try again.", "error"); }
     else if (!data.success) showMessage(generationMessage, data.message, "error");
-    else showMessage(generationMessage, data.message, "success");
+    else showMessage(generationMessage, "Your video is on its way. You can close this page and come back later.", "success");
   } finally {
     await loadJobs();
+    $("jobPanel").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 });
 
