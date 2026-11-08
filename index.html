@@ -174,6 +174,92 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
   .trust .wrap{justify-content:center;text-align:center}.plan{padding:30px 24px}.fgrid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.card,.btn{transition:none}}
+
+/* Mobile navigation and sample-video layout */
+@media (max-width: 560px) {
+    .nav {
+        height: 64px;
+        gap: 10px;
+    }
+
+    .brand {
+        font-size: 16px;
+        gap: 8px;
+        white-space: nowrap;
+    }
+
+    .brand i {
+        width: 31px;
+        height: 31px;
+        flex: 0 0 31px;
+    }
+
+    .nav-cta {
+        gap: 8px;
+        margin-left: auto;
+    }
+
+    .nav-cta > .btn {
+        padding: 9px 13px;
+        font-size: 12px;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    .burger {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        border-radius: 11px;
+    }
+
+    /* Sample video caption */
+    .vcap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 4px;
+        padding: 12px 6px 4px;
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .vcap span {
+        display: block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .yt .play {
+        width: 58px;
+        height: 58px;
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 360px) {
+    .wrap {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .brand {
+        font-size: 15px;
+    }
+
+    .nav-cta > .btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .burger {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+}
+
 </style>
 <noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
