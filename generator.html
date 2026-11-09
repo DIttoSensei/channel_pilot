@@ -672,6 +672,43 @@ input:focus {
   }
 }
 
+/* MAINTENANCE / SERVICE ANNOUNCEMENT */
+
+.service-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-left: 4px solid #ea580c;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 24px;
+}
+
+.service-alert-icon {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.service-alert-content h3 {
+  font-size: 14px;
+  color: #9a3412;
+  margin-bottom: 5px;
+}
+
+.service-alert-content p {
+  font-size: 12px;
+  color: #9a3412;
+  line-height: 1.7;
+}
+
+@media (max-width: 560px) {
+  .service-alert {
+    padding: 13px;
+  }
+}
+
 /* VERY SMALL PHONES */
 
 @media (max-width: 360px) {
@@ -739,6 +776,24 @@ input:focus {
 </nav>
 
 <main class="container">
+
+  <!-- SERVICE ALERT -->
+  <div class="service-alert">
+    <div class="service-alert-icon">⚠️</div>
+
+    <div class="service-alert-content">
+      <h3>Temporary Service Disruption</h3>
+
+      <p>
+        We are currently experiencing technical difficulties
+        with our video generation service. Please do not submit
+        new generation requests until service is restored.
+        Existing queued requests are safe. We apologise for
+        the inconvenience.
+      </p>
+    </div>
+  </div>
+
 
   <div class="page-heading">
     <h1>Video Generator</h1>
@@ -984,6 +1039,12 @@ input:focus {
 
   </div>
 </main>
+
+
+
+
+
+
 
 <footer class="footer">
   Channel Pilot &copy; 2026. All rights reserved.
