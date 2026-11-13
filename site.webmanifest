@@ -1,0 +1,11 @@
+
+{
+  "name": "Channel Pilot",
+  "short_name": "Channel Pilot",
+  "description": "AI faceless video generator for content creators.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb"
+}
