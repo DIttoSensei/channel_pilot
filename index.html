@@ -1,23 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f8faff">
-<title>Channel Pilot — Your faceless video workflow, on autopilot</title>
-<meta name="description" content="Pick a category, click generate, and Channel Pilot writes, voices and renders a finished faceless video for you.">
+
+<title>AI Faceless Video Generator | Channel Pilot</title>
+<meta name="description" content="Create faceless videos with AI-generated scripts, narration, visuals, subtitles and music. Choose a category and download a finished vertical video with Channel Pilot.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://channelpilot.indevs.in/">
+
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Channel Pilot">
 <meta property="og:url" content="https://channelpilot.indevs.in/">
-<meta property="og:title" content="Channel Pilot — Your faceless video workflow, on autopilot">
-<meta property="og:description" content="Turn an idea into a finished video with one repeatable workflow.">
+<meta property="og:title" content="AI Faceless Video Generator | Channel Pilot">
+<meta property="og:description" content="Turn a category into a finished faceless video with AI-generated scripts, narration, visuals, subtitles and music.">
 <meta property="og:image" content="https://channelpilot.indevs.in/assets/preview-image.png">
+<meta property="og:image:alt" content="Channel Pilot AI faceless video generator">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Faceless Video Generator | Channel Pilot">
+<meta name="twitter:description" content="Create finished faceless videos with AI scripts, narration, visuals, subtitles and music.">
+<meta name="twitter:image" content="https://channelpilot.indevs.in/assets/preview-image.png">
+
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Channel Pilot",
+  "url": "https://channelpilot.indevs.in/",
+  "applicationCategory": "MultimediaApplication",
+  "applicationSubCategory": "AI faceless video generator",
+  "operatingSystem": "Any",
+  "description": "Channel Pilot is a web-based AI faceless video generator that creates narration-led vertical videos using generated scripts, narration, visuals, subtitles and background music.",
+  "featureList": [
+    "AI-assisted script writing",
+    "AI narration",
+    "AI-generated scene visuals",
+    "Background music",
+    "Subtitles",
+    "Vertical 9:16 video rendering",
+    "Downloadable video output"
+  ],
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "3",
+    "highPrice": "35",
+    "offerCount": "4",
+    "url": "https://channelpilot.indevs.in/#pricing"
+  }
+}
+</script>
+
 <style>
 :root{--blue:#2563eb;--blue-d:#1d4ed8;--ink:#101a33;--muted:#64708a;--line:#e6ecf5;--soft:#f5f8fe}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -33,8 +78,6 @@ h1,h2,h3{letter-spacing:-.03em;line-height:1.12;font-weight:800}
 .btn-p{background:var(--blue);color:#fff;box-shadow:0 10px 28px rgba(37,99,235,.25)}.btn-p:hover{background:var(--blue-d);transform:translateY(-2px)}
 .btn-g{border:1px solid var(--line);background:#fff;color:#2b3652}.btn-g:hover{border-color:#bfdbfe;transform:translateY(-2px)}
 .btn-w{background:#fff;color:var(--ink)}.btn-w:hover{transform:translateY(-2px)}
-
-/* header */
 header{position:fixed;inset:0 0 auto 0;z-index:50;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
 header.scrolled{background:rgba(255,255,255,.97);border-color:var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
@@ -50,18 +93,14 @@ header.scrolled{background:rgba(255,255,255,.97);border-color:var(--line)}
 .mmenu{display:none;background:#fff;border-top:1px solid var(--line);padding:16px 20px 20px}
 .mmenu a{display:block;padding:10px 0;font-weight:600;font-size:15px;color:#334}
 .mmenu.open{display:block}
-
-/* hero */
 .hero{position:relative;padding:150px 0 90px;background:radial-gradient(ellipse at 50% 0,#dbeafe 0,rgba(219,234,254,0) 62%),linear-gradient(#f8fbff,#fff)}
 .hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.05) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(#000,transparent 85%);mask-image:linear-gradient(#000,transparent 85%);pointer-events:none}
 .hero .in{position:relative;text-align:center;max-width:820px;margin:0 auto}
 .hero h1{font-size:clamp(40px,7vw,74px);letter-spacing:-.05em}
 .hero h1 span{background:linear-gradient(100deg,#2563eb,#5797ff 60%,#1d4ed8);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p.lead{margin:24px auto 0;max-width:620px;font-size:18px;color:#56627c;line-height:1.75}
+.hero p.lead{margin:24px auto 0;max-width:680px;font-size:18px;color:#56627c;line-height:1.75}
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
 .hero .note{margin-top:18px;font-size:12px;color:#94a0b8;font-weight:500}
-
-/* preview */
 .preview{position:relative;max-width:980px;margin:64px auto 0;border-radius:26px;padding:10px;background:rgba(255,255,255,.8);border:1px solid #fff;box-shadow:0 24px 70px rgba(29,78,216,.14)}
 .app{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
 .bar{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#f8fafd;border-bottom:1px solid #eef2f8}
@@ -83,8 +122,6 @@ header.scrolled{background:rgba(255,255,255,.97);border-color:var(--line)}
 .steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
 .steps3 div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:12px;font-weight:700;color:#334}
 .steps3 span{display:block;font-size:10px;color:#9aa5bb;letter-spacing:.08em}
-
-/* sections */
 section{content-visibility:auto;contain-intrinsic-size:1px 700px}
 .sec{padding:96px 0}
 .head{text-align:center;max-width:680px;margin:0 auto 56px}
@@ -142,113 +179,8 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
 .fgrid ul{list-style:none;display:grid;gap:12px;font-size:14px;color:var(--muted)}
 .fgrid a:hover{color:var(--blue)}
 .copy{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid #eef2f8;padding-top:24px;font-size:12px;color:#a0abc0}
-
-/* reveal */
 .rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .rv.in{opacity:1;transform:none}
-
-@media(max-width:900px){
-  .links,.nav-cta .signin{display:none}.burger{display:flex}
-  .nav-cta{gap:10px}
-  .app-body{grid-template-columns:1fr}.pane+.pane{border-left:0;border-top:1px solid #eef2f8}
-  .grid3{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}
-  .show,.faq{grid-template-columns:1fr;gap:36px}
-  .band{grid-template-columns:1fr;padding:38px 26px}
-  .fgrid{grid-template-columns:1fr 1fr}
-  .sec{padding:72px 0}
-}
-@media(max-width:560px){
-  .hero{padding:124px 0 70px}.grid4{grid-template-columns:1fr}
-  .trust .wrap{justify-content:center;text-align:center}.fgrid{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.card,.btn{transition:none}}
-
-/* Mobile navigation and sample-video layout */
-@media (max-width: 560px) {
-    .nav {
-        height: 64px;
-        gap: 10px;
-    }
-
-    .brand {
-        font-size: 16px;
-        gap: 8px;
-        white-space: nowrap;
-    }
-
-    .brand i {
-        width: 31px;
-        height: 31px;
-        flex: 0 0 31px;
-    }
-
-    .nav-cta {
-        gap: 8px;
-        margin-left: auto;
-    }
-
-    .nav-cta > .btn {
-        padding: 9px 13px;
-        font-size: 12px;
-        line-height: 1.2;
-        white-space: nowrap;
-    }
-
-    .burger {
-        width: 38px;
-        height: 38px;
-        flex: 0 0 38px;
-        border-radius: 11px;
-    }
-
-    /* Sample video caption */
-    .vcap {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 4px;
-        padding: 12px 6px 4px;
-        font-size: 10px;
-        line-height: 1.4;
-    }
-
-    .vcap span {
-        display: block;
-        max-width: 100%;
-        overflow-wrap: anywhere;
-    }
-
-    .yt .play {
-        width: 58px;
-        height: 58px;
-        font-size: 21px;
-    }
-}
-
-@media (max-width: 360px) {
-    .wrap {
-        padding-left: 14px;
-        padding-right: 14px;
-    }
-
-    .brand {
-        font-size: 15px;
-    }
-
-    .nav-cta > .btn {
-        padding: 8px 10px;
-        font-size: 11px;
-    }
-
-    .burger {
-        width: 36px;
-        height: 36px;
-        flex-basis: 36px;
-    }
-}
-
-/* Pricing plans */
 .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;margin:0 auto}
 .pcard{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px 24px}
 .pcard h3{font-size:16px;font-weight:700;letter-spacing:-.01em}
@@ -264,17 +196,56 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
 .incl{max-width:760px;margin:40px auto 0;padding:26px 30px;border:1px solid var(--line);border-radius:22px;background:#fff;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;font-size:14px;color:#334}
 .incl li{display:flex;gap:10px}.incl b{color:var(--blue);font-weight:800}
 .have2{display:block;text-align:center;margin-top:22px;font-size:14px;font-weight:600;color:var(--blue)}
-@media(max-width:900px){.plans{grid-template-columns:1fr 1fr}.incl{grid-template-columns:1fr}}
-@media(max-width:560px){.plans{grid-template-columns:1fr}.pcard.best{order:-1}.incl{padding:22px 20px}}
-
+.seo-copy{max-width:850px;margin:0 auto;color:var(--muted);line-height:1.85}
+.seo-copy h2{font-size:clamp(27px,4vw,38px);color:var(--ink);margin-bottom:18px}
+.seo-copy h3{font-size:19px;color:var(--ink);margin:28px 0 8px}
+.seo-copy p{margin:0 0 14px;font-size:15px}
+.seo-copy ul{padding-left:22px;margin:12px 0 18px}
+.seo-copy li{padding:4px 0;font-size:14px}
+@media(max-width:900px){
+.links,.nav-cta .signin{display:none}.burger{display:flex}
+.nav-cta{gap:10px}
+.app-body{grid-template-columns:1fr}.pane+.pane{border-left:0;border-top:1px solid #eef2f8}
+.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}
+.show,.faq{grid-template-columns:1fr;gap:36px}
+.band{grid-template-columns:1fr;padding:38px 26px}
+.fgrid{grid-template-columns:1fr 1fr}
+.sec{padding:72px 0}
+.plans{grid-template-columns:1fr 1fr}.incl{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+.hero{padding:124px 0 70px}.grid4{grid-template-columns:1fr}
+.trust .wrap{justify-content:center;text-align:center}.fgrid{grid-template-columns:1fr}
+.plans{grid-template-columns:1fr}.pcard.best{order:-1}.incl{padding:22px 20px}
+.nav{height:64px;gap:10px}
+.brand{font-size:16px;gap:8px;white-space:nowrap}
+.brand i{width:31px;height:31px;flex:0 0 31px}
+.nav-cta{gap:8px;margin-left:auto}
+.nav-cta>.btn{padding:9px 13px;font-size:12px;line-height:1.2;white-space:nowrap}
+.burger{width:38px;height:38px;flex:0 0 38px;border-radius:11px}
+.vcap{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px;padding:12px 6px 4px;font-size:10px;line-height:1.4}
+.vcap span{display:block;max-width:100%;overflow-wrap:anywhere}
+.yt .play{width:58px;height:58px;font-size:21px}
+}
+@media(max-width:360px){
+.wrap{padding-left:14px;padding-right:14px}
+.brand{font-size:15px}
+.nav-cta>.btn{padding:8px 10px;font-size:11px}
+.burger{width:36px;height:36px;flex-basis:36px}
+}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.rv{opacity:1;transform:none;transition:none}
+.card,.btn{transition:none}
+}
 </style>
 <noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
-<body>
 
+<body>
 <header id="top">
   <div class="wrap nav">
-    <a href="#" class="brand" aria-label="Channel Pilot home">
+    <a href="/" class="brand" aria-label="Channel Pilot home">
       <i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 16.5v-9Z" stroke="#fff" stroke-width="1.8"/><path d="m10 9 5 3-5 3V9Z" fill="#fff"/></svg></i>
       <span>Channel<span class="blue">Pilot</span></span>
     </a>
@@ -296,15 +267,14 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
   <section class="hero" style="content-visibility:visible">
     <div class="wrap">
       <div class="in">
-        <h1>From an idea to a <span>finished video.</span></h1>
-        <p class="lead">Pick a category, click generate, and Channel Pilot writes, voices and renders a finished faceless video for you. Less time assembling, more time growing your channel.</p>
+        <h1>AI Faceless Video Generator for <span>Content Creators.</span></h1>
+        <p class="lead">Create faceless videos without assembling a collection of separate production tools. Choose a category and Channel Pilot generates the script, narration, scene visuals, subtitles and finished vertical video for you.</p>
         <div class="cta">
           <a class="btn btn-p" href="#pricing">Get started →</a>
           <a class="btn btn-g" href="#showcase">▶ Watch a sample</a>
         </div>
         <p class="note">Vertical 9:16 videos, ready for Shorts, Reels and TikTok.</p>
       </div>
-
       <div class="preview" aria-hidden="true">
         <div class="app">
           <div class="bar"><div class="dots"><b style="background:#fca5a5"></b><b style="background:#fcd34d"></b><b style="background:#6ee7b7"></b>&nbsp;&nbsp;CHANNEL PILOT / GENERATOR</div><span class="ready">● READY</span></div>
@@ -330,28 +300,45 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
   </div></section>
 
   <section class="sec" id="workflow"><div class="wrap">
-    <div class="head rv"><span class="eyebrow">A simpler process</span><h2>Less time assembling.<br><span>More time creating.</span></h2><p>Three steps from nothing to a finished video file.</p></div>
+    <div class="head rv"><span class="eyebrow">A simpler process</span><h2>From category to finished video.<br><span>Three simple steps.</span></h2><p>Use one connected workflow to create a faceless video without manually assembling every production stage.</p></div>
     <div class="grid3">
-      <article class="card rv"><div class="num">01</div><small>Choose</small><h3>Pick a category</h3><p>Click the kind of video you want, from mystery and sci-fi to history and educational. Each category has its own story style and look.</p></article>
-      <article class="card rv"><div class="num">02</div><small>Generate</small><h3>Click generate</h3><p>Channel Pilot writes, voices and renders your video. Most take about 5 to 15 minutes, and you don’t have to wait. Close the page and come back anytime.</p></article>
-      <article class="card rv"><div class="num">03</div><small>Download</small><h3>Review and publish</h3><p>Your finished video appears in your dashboard, ready to download and publish wherever and whenever you like.</p></article>
+      <article class="card rv"><div class="num">01</div><small>Choose</small><h3>Pick a video category</h3><p>Choose the kind of video you want, from mystery and sci-fi to history, educational content and story-driven categories. Each category has its own writing style and look.</p></article>
+      <article class="card rv"><div class="num">02</div><small>Generate</small><h3>Generate your video</h3><p>Channel Pilot creates the script, narration and scene visuals, then assembles the video with subtitles and background music.</p></article>
+      <article class="card rv"><div class="num">03</div><small>Download</small><h3>Review and publish</h3><p>Your finished video appears in your dashboard, ready to download. Review the result and decide where and when to publish it.</p></article>
     </div>
   </div></section>
 
   <section class="sec features" id="categories"><div class="wrap">
-    <div class="head rv"><span class="eyebrow">Pick your style</span><h2>A category for every kind of channel.</h2><p>Each one is written, voiced and illustrated in its own style.</p></div>
+    <div class="head rv"><span class="eyebrow">Pick your style</span><h2>Faceless video ideas for different channel niches.</h2><p>Choose a category and generate narration-led vertical videos in its own story style and visual direction.</p></div>
     <div class="cats rv">
       <span>Relationship Drama</span><span>Betrayal and Secrets</span><span>Family Conflict</span><span>Moral Dilemma</span><span>Mystery</span><span>Horror</span><span>Sci-Fi</span><span>Fantasy</span><span>Comedy</span><span>Motivation</span><span>Educational</span><span>History</span>
     </div>
   </div></section>
 
   <section class="sec" id="features"><div class="wrap">
-    <div class="head rv"><span class="eyebrow">The production stack</span><h2>The moving parts.<br>Working as one.</h2><p>Stop jumping between disconnected tools. Everything needed for a faceless video happens in one place.</p></div>
+    <div class="head rv"><span class="eyebrow">The production stack</span><h2>AI video creation tools.<br>Working as one.</h2><p>Channel Pilot brings the main stages of faceless video production into one workflow instead of making you jump between disconnected tools.</p></div>
     <div class="grid4">
-      <article class="card rv"><div class="ico" style="background:#eff6ff;color:#2563eb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></div><h3 style="font-size:18px">Script writing</h3><p>A structured, story-driven script written for your chosen category.</p></article>
+      <article class="card rv"><div class="ico" style="background:#eff6ff;color:#2563eb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></div><h3 style="font-size:18px">AI script writing</h3><p>A structured, story-driven script written for your chosen category.</p></article>
       <article class="card rv"><div class="ico" style="background:#eef2ff;color:#4f46e5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 10v4h3l5 4V6l-5 4H4Z"/><path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"/></svg></div><h3 style="font-size:18px">AI narration</h3><p>Natural voices, from a single narrator to full multi-character scenes.</p></article>
-      <article class="card rv"><div class="ico" style="background:#f0f9ff;color:#0284c7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg></div><h3 style="font-size:18px">AI visuals</h3><p>A unique image for every scene, matched to the story and style.</p></article>
-      <article class="card rv"><div class="ico" style="background:#ecfdf5;color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3 style="font-size:18px">Music and render</h3><p>Background music, subtitles and a finished video file, assembled for you.</p></article>
+      <article class="card rv"><div class="ico" style="background:#f0f9ff;color:#0284c7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/></svg></div><h3 style="font-size:18px">AI visuals</h3><p>A generated image for every scene, matched to the story and style.</p></article>
+      <article class="card rv"><div class="ico" style="background:#ecfdf5;color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><h3 style="font-size:18px">Music and rendering</h3><p>Background music, subtitles and a finished video file, assembled for you.</p></article>
+    </div>
+  </div></section>
+
+  <section class="sec features"><div class="wrap">
+    <div class="seo-copy rv">
+      <h2>One workflow for AI faceless video creation</h2>
+      <p>Channel Pilot is an AI faceless video generator built for creators who want to produce narration-led videos without appearing on camera. Instead of manually coordinating script writing, voiceover, scene images, subtitles and editing, you select a content category and let the generator assemble those stages into a downloadable video.</p>
+      <h3>Create vertical videos for short-form platforms</h3>
+      <p>Videos are rendered in a vertical 9:16 format suited to platforms such as YouTube Shorts, Instagram Reels and TikTok. You can review the finished video before deciding where to publish it. Channel Pilot generates the video file; it does not automatically publish to your social accounts.</p>
+      <h3>What the video generator produces</h3>
+      <ul>
+        <li>Category-based, AI-assisted script writing.</li>
+        <li>AI-generated narration and scene visuals.</li>
+        <li>Background music and subtitles.</li>
+        <li>A rendered vertical video that you can download.</li>
+      </ul>
+      <p>Whether you are exploring story-based content, mystery, horror, educational videos or other faceless channel ideas, Channel Pilot brings these production steps together in one place.</p>
     </div>
   </div></section>
 
@@ -359,13 +346,13 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
     <div class="show">
       <div class="rv">
         <span class="eyebrow">See what it can make</span>
-        <h2>The result matters more than the process.</h2>
-        <p>A workflow is only useful if the final video is worth watching. Take a look at the style and production quality Channel Pilot is built to create.</p>
+        <h2>See the finished video, not just the workflow.</h2>
+        <p>A video generator is only useful if the final result is worth watching. Take a look at a sample of the style and production quality Channel Pilot is built to create.</p>
       </div>
       <div class="rv">
         <div class="vid">
           <button class="yt" id="yt" aria-label="Play the Channel Pilot sample video">
-            <img src="https://i.ytimg.com/vi/OzE0d7Gg7hw/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <img src="https://i.ytimg.com/vi/OzE0d7Gg7hw/hqdefault.jpg" alt="Preview of a Channel Pilot generated video" loading="lazy" width="480" height="360">
             <span class="play">▶</span>
           </button>
           <div class="vcap"><span>CHANNEL PILOT / SAMPLE OUTPUT</span><span class="blue">Click to play</span></div>
@@ -430,7 +417,7 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
 
   <section class="sec" id="faq"><div class="wrap">
     <div class="faq">
-      <div class="l rv"><span class="eyebrow">Questions, answered</span><h2>A few things<br>you should know.</h2><p>Want to understand the setup before you start? Here are the common questions.</p></div>
+      <div class="l rv"><span class="eyebrow">Questions, answered</span><h2>What to know before you start.</h2><p>Understand how the AI faceless video generator works before choosing a plan.</p></div>
       <div class="rv">
         <details><summary>Do I need video editing experience?</summary><p>No. The workflow handles the production steps, and you stay in control of the category and the final result.</p></details>
         <details><summary>What kind of videos does Channel Pilot make?</summary><p>Narration-led, faceless videos in vertical 9:16 format, across twelve categories including mystery, horror, sci-fi, history and educational. Each category has its own writing style, voices and visuals.</p></details>
@@ -446,8 +433,8 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
   <section style="padding:0 0 96px"><div class="wrap">
     <div class="close rv">
       <span class="eyebrow">Your next video starts here</span>
-      <h2>Make your production workflow work harder.</h2>
-      <p>Pick a category, click generate and see what Channel Pilot can do for your channel.</p>
+      <h2>Create your next faceless video with Channel Pilot.</h2>
+      <p>Choose a category, generate a video and see how a connected production workflow can help your channel.</p>
       <a class="btn btn-p" href="#pricing">Get started with Channel Pilot ↗</a>
     </div>
   </div></section>
@@ -457,8 +444,8 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a href="#" class="brand"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 16.5v-9Z" stroke="#fff" stroke-width="1.8"/><path d="m10 9 5 3-5 3V9Z" fill="#fff"/></svg></i><span>Channel<span class="blue">Pilot</span></span></a>
-        <p>A more connected way to create faceless videos, from first idea to finished file.</p>
+        <a href="/" class="brand"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 16.5v-9Z" stroke="#fff" stroke-width="1.8"/><path d="m10 9 5 3-5 3V9Z" fill="#fff"/></svg></i><span>Channel<span class="blue">Pilot</span></span></a>
+        <p>An AI faceless video generator that brings script writing, narration, visuals and rendering into one workflow.</p>
       </div>
       <div><h4>Explore</h4><ul><li><a href="#workflow">How it works</a></li><li><a href="#categories">Categories</a></li><li><a href="#showcase">Sample video</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="/about.html">About</a></li><li><a href="/privacy.html">Privacy policy</a></li><li><a href="/terms.html">Terms of service</a></li></ul></div>
@@ -472,29 +459,47 @@ footer{border-top:1px solid #eef2f8;padding:60px 0 28px}
 (function () {
   var header = document.getElementById('top');
   function onScroll() { header.classList.toggle('scrolled', window.scrollY > 12); }
-  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  var burger = document.getElementById('burger'), menu = document.getElementById('mmenu');
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mmenu');
+
   burger.addEventListener('click', function () {
     var open = menu.classList.toggle('open');
     burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
+
   menu.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); });
+    a.addEventListener('click', function () {
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open menu');
+    });
   });
 
   var items = document.querySelectorAll('.rv');
+
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
     }, { threshold: 0.1 });
-    items.forEach(function (el) { io.observe(el); });
-  } else { items.forEach(function (el) { el.classList.add('in'); }); }
 
-  // Load the YouTube player only when the visitor clicks play
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('in'); });
+  }
+
   var yt = document.getElementById('yt');
+
   yt.addEventListener('click', function () {
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/OzE0d7Gg7hw?autoplay=1&rel=0';
